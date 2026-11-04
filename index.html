@@ -36,27 +36,42 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
 <div class="navright"><button class="btn small" id="loginOpen">Login / Sign up</button><button class="iconbtn menu" id="menuBtn">☰</button></div>
 </div><nav class="wrap mobile" id="mobileNav" style="display:none"><a href="#tools">Tools</a><a href="#uid">UID Player</a><a href="#about">About</a></nav></header>
 <main id="home">
-<section class="wrap hero"><div><span class="pill"><i class="dot"></i> FREE FIRE COMMUNITY TOOLKIT</span><h1>PLAY SMART.<br><span class="grad">RISE HIGH.</span></h1><p class="lead">Your gaming space for stylish names, bio designs, symbols, sensitivity planning and fun mini tools — all in one place.</p><div class="actions"><a class="btn primary" href="#tools">Explore tools →</a><a class="btn" href="#uid">UID Player</a></div><div class="stats"><div class="stat"><b>10+</b><small>LOCAL TOOLS</small></div><div class="stat"><b>0</b><small>API KEYS NEEDED</small></div><div class="stat"><b>2</b><small>LANGUAGES</small></div></div></div><div class="art"><div class="core">⚡</div><div class="artfoot"><span>DHEERAJ HUB</span><span>PLAYER TOOLKIT</span></div></div></section>
+<section class="wrap hero"><div><span class="pill"><i class="dot"></i> FREE FIRE COMMUNITY TOOLKIT</span><h1>PLAY SMART.<br><span class="grad">RISE HIGH.</span></h1><p class="lead">Your gaming space for stylish names, bio designs, symbols, sensitivity planning and fun mini tools — all in one place.</p><div class="actions"><a class="btn primary" href="#tools">Explore tools →</a><a class="btn" href="#tools" id="heroUidPlayer">UID Player</a></div><div class="stats"><div class="stat"><b>12+</b><small>LOCAL TOOLS</small></div><div class="stat"><b>0</b><small>API KEYS NEEDED</small></div><div class="stat"><b>2</b><small>LANGUAGES</small></div></div></div><div class="art"><div class="core">⚡</div><div class="artfoot"><span>DHEERAJ HUB</span><span>PLAYER TOOLKIT</span></div></div></section>
 <section class="wrap section" id="tools"><div class="eyebrow">PICK A TOOL</div><h2 class="heading">Gaming tools</h2><p class="muted">Choose a tool. All local tools work in your browser without a login or API key.</p>
 <div class="toolgrid" id="toolGrid">
 <button class="toolcard" data-open="names"><span class="ico">Aa</span><span><b>FF Names Pro</b><small>Stylish nickname generator</small></span></button>
+<button class="toolcard" data-open="idprice"><span class="ico">💎</span><span><b>FF ID Price Calculator</b><small>Prime level and total top-up value</small></span></button>
+<button class="toolcard" data-open="playeraura"><span class="ico">👤</span><span><b>Player Aura</b><small>Enter UID to reveal player aura</small></span></button>
+<button class="toolcard" data-open="booster"><span class="ico">🚀</span><span><b>FF Game Booster</b><small>Get match-ready</small></span></button>
 <button class="toolcard" data-open="bio"><span class="ico">📖</span><span><b>FF Aura Bio</b><small>Colourful bio code maker</small></span></button>
 <button class="toolcard" data-open="fonts"><span class="ico">𝓐</span><span><b>Stylish Text</b><small>Fancy font converter</small></span></button>
 <button class="toolcard" data-open="symbols"><span class="ico">⭐</span><span><b>FF Symbols</b><small>Crowns, stars and more</small></span></button>
 <button class="toolcard" data-open="qr"><span class="ico">▦</span><span><b>QR Maker</b><small>Create a QR from text or link</small></span></button>
 <button class="toolcard" data-open="device"><span class="ico">📱</span><span><b>Device Sensi</b><small>Device-based settings planner</small></span></button>
 <button class="toolcard" data-open="sensi"><span class="ico">🎯</span><span><b>VIP Sensi</b><small>Build your own sensitivity preset</small></span></button>
-<button class="toolcard" data-open="booster"><span class="ico">🚀</span><span><b>Game Booster Guide</b><small>Safe phone performance checklist</small></span></button>
+
 <button class="toolcard" data-open="loadout"><span class="ico">🎒</span><span><b>Loadout Planner</b><small>Save character, pet and weapon ideas</small></span></button>
 <button class="toolcard" data-open="quiz"><span class="ico">💀</span><span><b>Noob Guess Quiz</b><small>Quick Free Fire knowledge quiz</small></span></button>
 <button class="toolcard" data-open="fun"><span class="ico">🤝</span><span><b>Fun Match</b><small>Just-for-fun friendship score</small></span></button>
-<button class="toolcard" data-open="uid"><span class="ico">👤</span><span><b>UID Player Profile</b><small>Reserved for a future live API</small></span></button>
+<button class="toolcard" data-open="playeraura"><span class="ico">👤</span><span><b>UID Player Aura</b><small>Enter UID to reveal player aura</small></span></button>
 </div></section>
 
 <section class="wrap section" id="toolArea" style="display:none">
 <div class="backrow"><div><div class="eyebrow">DHEERAJ HUB TOOL</div><h2 class="heading" id="toolTitle">Tool</h2></div><button class="btn" id="backTools">← All tools</button></div>
 
 <div class="panel toolview" id="view-names"><h3>FF Names Pro</h3><p>Enter a nickname and generate different Free Fire-style designs.</p><div class="field"><input class="input" id="nameInput" maxlength="18" placeholder="Enter nickname"><button class="btn primary" id="makeNames">Generate names</button></div><div class="resultlist" id="nameResults"><div class="result">Your stylish names will appear here.</div></div></div>
+
+<div class="panel toolview" id="view-idprice"><h3>FF ID Price Calculator</h3><p>India reference estimate using your selected Prime level and total diamonds purchased. This does not access your game account.</p>
+<div class="two">
+ <div><label for="idPrime">1. Select your Prime level</label><select class="input" id="idPrime"><option value="1">Prime 1</option><option value="2">Prime 2</option><option value="3">Prime 3</option><option value="4">Prime 4</option><option value="5">Prime 5</option><option value="6">Prime 6</option><option value="7">Prime 7</option><option value="8">Prime 8</option></select><small id="primeRequirement" class="muted">Prime 1 requires 100 diamonds</small></div>
+ <div><label for="idDiamonds">2. Total top-up diamonds</label><input class="input" id="idDiamonds" type="number" min="1" max="500000" inputmode="numeric" placeholder="e.g. 30000"></div>
+</div>
+<button class="btn primary" id="calculateIdPrice" style="margin-top:12px;width:100%">Calculate ID value</button>
+<div class="resultlist" id="idPriceResults"><div class="result">Select your Prime level and enter total top-up diamonds.</div></div>
+<div class="notice" style="margin-top:12px"><b>India pricing note:</b> Diamond pack rates are reference estimates, not live verified prices. Actual in-game prices, bonus diamonds and offers may differ. Estimated top-up spending is not a guaranteed account selling price. Never share passwords or OTPs.</div>
+</div>
+
+<div class="panel toolview" id="view-playeraura"><h3>Player Aura</h3><p>Enter a player UID to reveal their aura.</p><div class="field"><input class="input" id="auraUid" type="text" inputmode="numeric" maxlength="15" placeholder="Enter Free Fire UID"><button class="btn primary" id="makeAura">Check Aura</button></div><div class="resultlist" id="auraResults"><div class="result">Enter a UID to reveal the player aura.</div></div><div class="notice">Player Aura is a UID-based entertainment result, not verified rank, skill or match-history data.</div></div>
 
 <div class="panel toolview" id="view-bio"><h3>Bio Code Studio</h3><p>Type your bio, choose a colour style and copy the generated code. Game support for colours may vary.</p><textarea class="input" id="bioInput" rows="3" maxlength="120" placeholder="Type your bio..."></textarea><div class="chips" id="bioColors"><button class="chip active" data-color="red">RED</button><button class="chip" data-color="yellow">YELLOW</button><button class="chip" data-color="blue">BLUE</button><button class="chip" data-color="green">GREEN</button><button class="chip" data-color="pink">PINK</button><button class="chip" data-color="gold">GOLD</button><button class="chip" data-color="bold">BOLD</button></div><div class="preview" id="bioPreview">Preview...</div><button class="btn pink" id="copyBio" style="width:100%;margin-top:12px">COPY BIO CODE</button></div>
 
@@ -70,7 +85,7 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
 
 <div class="panel toolview" id="view-sensi"><h3>VIP Sensi Builder</h3><p>Adjust each value and save your own preset locally.</p><div class="sliders" id="sensiSliders"></div><div class="result" id="sensiSummary">General / Red Dot / 2x / 4x / Sniper / Free Look</div><button class="btn primary" id="saveSensi" style="margin-top:12px">Save preset</button></div>
 
-<div class="panel toolview" id="view-booster"><h3>Safe Game Booster Guide</h3><p>This is a checklist only. A webpage cannot directly boost FPS, clear RAM, or change Android system settings.</p><div id="boosterList"></div><button class="btn primary" id="saveBooster" style="margin-top:12px">Save my checklist</button><div class="result" id="boosterResult">Tick the steps you have completed.</div></div>
+<div class="panel toolview" id="view-booster"><h3>FF Game Booster 🚀</h3><p>Get ready for your next match with a focused game-preparation sequence.</p><div class="result" id="boostVisual" style="text-align:center;padding:22px"><div style="font-size:48px">⚡</div><h3 id="boostHeadline">Ready to enter battle?</h3><p id="boostStatus">Start the preparation sequence.</p><div style="height:12px;background:#252b3d;border-radius:20px;overflow:hidden;margin:14px 0"><div id="boostProgress" style="height:100%;width:0%;background:linear-gradient(90deg,#9b68ff,#20d5df);transition:width .3s"></div></div><div id="boostPercent">0%</div></div><button class="btn primary" id="boostDemoBtn" style="width:100%;margin:12px 0">START BOOST</button><div class="notice">Match-preparation animation only. It does not change device performance, RAM, CPU or FPS.</div><h4>Real safe performance tips</h4><div id="boosterList"></div><button class="btn" id="saveBooster" style="margin-top:12px">Save my checklist</button><div class="result" id="boosterResult">Tick any tips you have completed.</div></div>
 
 <div class="panel toolview" id="view-loadout"><h3>Loadout Planner</h3><p>Save a loadout idea on this device.</p><div class="two"><input class="input" id="loadChar" placeholder="Character"><input class="input" id="loadPet" placeholder="Pet"><input class="input" id="loadWeapon" placeholder="Weapon"><input class="input" id="loadRole" placeholder="Play style / role"></div><button class="btn primary" id="saveLoadout" style="margin-top:12px">Save loadout</button><div class="resultlist" id="loadoutList"></div></div>
 
@@ -81,7 +96,7 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
 <div class="panel toolview" id="view-uid"><h3>UID Player Profile</h3><p>UID profile lookup is intentionally inactive until a reliable data source is configured. No fake player details will be shown.</p><div class="field"><input class="input" id="uidInput" inputmode="numeric" placeholder="Enter Free Fire UID"><select class="input" id="uidRegion"><option>India (IND)</option><option>Indonesia (ID)</option><option>Russia (RU)</option><option>CIS</option><option>Thailand (TH)</option><option>Singapore (SG)</option><option>Brazil (BR)</option></select></div><button class="btn primary" id="uidDemoSearch" style="margin-top:10px">Preview profile layout</button><div class="notice" style="margin-top:12px">This preview uses clearly marked sample data only. It does not fetch a real Free Fire account. A working API/backend is still required for live UID results.</div><div class="result" id="uidResult" style="display:none"></div></div>
 </section>
 
-<section class="wrap section" id="about"><div class="notice"><b>About DHEERAJ HUB:</b> Fan-made Free Fire companion. Local tools run in your browser and do not need your game login, password, OTP or API key. This site is not affiliated with Garena. The UID lookup is not live yet. QR generation may need an internet connection to load its browser library.</div></section>
+<section class="wrap section" id="about"><div class="notice"><b>About DHEERAJ HUB:</b> Fan-made Free Fire companion. Local tools run in your browser and do not need your game login, password, OTP or API key. This site is not affiliated with Garena. Live UID profile lookup requires a verified data API. Member sign-in requires Firebase setup. QR generation may need an internet connection to load its browser library.</div></section>
 </main>
 
 <div class="modalback" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
@@ -89,14 +104,16 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
   <div class="backrow"><span class="pill"><i class="dot"></i> MEMBER AREA</span><button class="iconbtn" id="loginClose" aria-label="Close">✕</button></div>
   <div class="core" style="width:70px;height:70px;font-size:28px;margin:14px auto">⚡</div>
   <h2 id="loginTitle" style="text-align:center">Welcome to DHEERAJ HUB</h2>
-  <p style="text-align:center">Sign-in interface preview</p>
+  <p id="authSubtitle" style="text-align:center">Sign in to your member account</p>
   <form id="loginForm">
    <label>Email address</label><input class="input" id="loginEmail" type="email" placeholder="you@example.com" autocomplete="email" required>
-   <label>Password</label><input class="input" id="loginPassword" type="password" placeholder="Enter password" minlength="6" autocomplete="current-password" required>
-   <button class="btn primary" type="submit" style="width:100%;margin-top:12px">Sign In</button>
+   <label>Password</label><input class="input" id="loginPassword" type="password" placeholder="At least 6 characters" minlength="6" autocomplete="current-password" required>
+   <button class="btn primary" id="authSubmit" type="submit" style="width:100%;margin-top:12px">Sign In</button>
   </form>
   <div class="loginfoot"><button class="btn small" id="signupMode" type="button">Create account</button><button class="btn small" id="adminMode" type="button">Admin area</button></div>
-  <div class="notice" id="loginMessage" style="margin-top:14px">Login UI is ready, but secure sign-in is not connected yet. Firebase configuration is required. Do not enter a real password here.</div>
+  <button class="btn small" id="logoutBtn" type="button" style="display:none;margin-top:12px">Sign out</button>
+  <div class="notice" id="loginMessage" style="margin-top:14px">Set up Firebase using the setup instructions before enabling member accounts.</div>
+  <div class="panel" id="adminPanel" style="display:none;margin-top:14px"><h3>Admin Area</h3><p id="adminStatus">Checking admin permission…</p><div id="adminContent"></div></div>
  </div>
 </div>
 <footer><div class="wrap">DHEERAJ HUB · Play smart. Rise high. · Independent fan project.</div></footer>
@@ -110,7 +127,7 @@ const safe=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;
 const copyText=async(text)=>{try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text)}else{const x=document.createElement('textarea');x.value=text;x.style.position='fixed';x.style.opacity='0';document.body.appendChild(x);x.select();const ok=document.execCommand('copy');x.remove();if(!ok)throw Error('copy failed')}toast('Copied to clipboard')}catch(e){toast('Copy unavailable on this browser')}};
 const get=(k,d)=>{try{return JSON.parse(localStorage.getItem('dhv2_'+k))??d}catch(e){return d}};
 const put=(k,v)=>{try{localStorage.setItem('dhv2_'+k,JSON.stringify(v));return true}catch(e){toast('Browser storage unavailable');return false}};
-const toolNames={names:'FF Names Pro',bio:'FF Aura Bio',fonts:'Stylish Text',symbols:'FF Symbols',qr:'QR Maker',device:'Device Sensi',sensi:'VIP Sensi Builder',booster:'Game Booster Guide',loadout:'Loadout Planner',quiz:'Noob Guess Quiz',fun:'Fun Match',uid:'UID Player Profile'};
+const toolNames={names:'FF Names Pro',idprice:'FF ID Price Calculator',playeraura:'Player Aura',bio:'FF Aura Bio',fonts:'Stylish Text',symbols:'FF Symbols',qr:'QR Maker',device:'Device Sensi',sensi:'VIP Sensi Builder',booster:'FF Game Booster',loadout:'Loadout Planner',quiz:'Noob Guess Quiz',fun:'Fun Match',uid:'UID Player Profile'};
 function openTool(id){document.querySelectorAll('.toolview').forEach(x=>x.classList.remove('active'));const v=$('view-'+id);if(!v)return;v.classList.add('active');$('toolArea').style.display='block';$('toolTitle').textContent=toolNames[id];$('tools').style.display='none';$('toolArea').scrollIntoView({behavior:'smooth'});if(id==='quiz'&&!quizStarted)showQuestion()}
 function backTools(){$('toolArea').style.display='none';$('tools').style.display='block';$('tools').scrollIntoView({behavior:'smooth'})}
 document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>openTool(b.dataset.open)));
@@ -121,6 +138,42 @@ $('mobileNav').querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
 
 // FF Name styles
 $('makeNames').addEventListener('click',()=>{const n=$('nameInput').value.trim();if(!n)return toast('Enter a nickname first');const styles=[`亗 ${n} 亗`,`꧁༺${n}༻꧂`,`『${n}』メ`,`乂${n}乂`,`么${n}么`,`★彡${n}彡★`,`♛ ${n} ♛`,`ツ${n}ツ`,`◤${n}◢`,`メ ${n} メ`,`么${n}亗`,`×͜× ${n}`];$('nameResults').innerHTML=styles.map(s=>`<div class="resultrow"><strong>${safe(s)}</strong><button class="btn small copy" data-copy="${safe(s)}">Copy</button></div>`).join('')});
+
+// India reference pack prices. These are estimates, not live official prices; update when verified in-game rates change.
+const idDiamondPacks=[{diamonds:100,price:80},{diamonds:310,price:250},{diamonds:520,price:400},{diamonds:1060,price:800},{diamonds:2180,price:1600},{diamonds:5600,price:4000}];
+const primeThresholds={1:100,2:1000,3:3000,4:10000,5:30000,6:60000,7:120000,8:200000};
+function updatePrimeRequirement(){const level=Number($('idPrime').value);$('primeRequirement').textContent=`Prime ${level} requires ${primeThresholds[level].toLocaleString('en-IN')} diamonds`; }
+$('idPrime').addEventListener('change',updatePrimeRequirement);updatePrimeRequirement();
+function estimateTopupCost(target){
+ const maxPack=Math.max(...idDiamondPacks.map(p=>p.diamonds));
+ const limit=target+maxPack;const dp=new Float64Array(limit+1);dp.fill(Infinity);dp[0]=0;
+ for(let amount=1;amount<=limit;amount++)for(const pack of idDiamondPacks)if(amount>=pack.diamonds){const v=dp[amount-pack.diamonds]+pack.price;if(v<dp[amount])dp[amount]=v;}
+ let bestAmount=-1,bestCost=Infinity;for(let amount=target;amount<=limit;amount++)if(dp[amount]<bestCost){bestCost=dp[amount];bestAmount=amount;}
+ return {cost:bestCost,diamonds:bestAmount};
+}
+$('calculateIdPrice').addEventListener('click',()=>{
+ const prime=Number($('idPrime').value),diamonds=Number($('idDiamonds').value);
+ if(!Number.isInteger(diamonds)||diamonds<1||diamonds>500000)return toast('Enter total diamonds from 1 to 500,000');
+ const estimate=estimateTopupCost(diamonds),required=primeThresholds[prime],meets=diamonds>=required;
+ const note=meets?'Entered diamonds meet the selected Prime threshold.':'Entered diamonds are below the selected Prime threshold; please double-check your inputs.';
+ const summary=`Prime ${prime}; Prime requirement: ${required} diamonds; Total top-up diamonds: ${diamonds}; Estimated India reference spending: ₹${Math.round(estimate.cost)}; Approx pack diamonds: ${estimate.diamonds}`;
+ $('idPriceResults').innerHTML=`<div class="resultrow"><span><small>Selected Prime level</small><br><strong>Prime ${prime}</strong><small>Prime ${prime} requirement: ${required.toLocaleString('en-IN')} diamonds</small></span></div><div class="resultrow"><span><small>Total top-up diamonds entered</small><br><strong>${diamonds.toLocaleString('en-IN')} 💎</strong><small>${safe(note)}</small></span></div><div class="resultrow"><span><small>Estimated India reference top-up spending</small><br><strong>₹${Math.round(estimate.cost).toLocaleString('en-IN')}</strong><small>Reference pack combination: approximately ${estimate.diamonds.toLocaleString('en-IN')} diamonds</small></span></div><button class="btn small copy" data-copy="${safe(summary)}">Copy result</button>`;
+});
+
+// UID-based Player Aura: surprise personality lines; this is entertainment, not live profile analysis.
+const auraLinePools=[
+ ['Aim ka confidence alag level par hai, bullets abhi raasta dhoondh rahi hain.','Enemy saamne tha, lekin crosshair vacation par chala gaya.','Training room mein sher, match mein silent mode.','One tap ka plan tha, poori magazine kaam par lag gayi.','Aim assist bhi bole: bhai khud try kar.'],
+ ['Rush karne ki speed fast, wapas lobby aane ki speed faster.','Strategy itni secret hai ki squad ko bhi nahi pata.','Gloo wall lagane mein architect wali degree hai.','Enemy ko confuse karne nikla, khud map mein kho gaya.','Bhai ka gameplay suspense movie se kam nahi.'],
+ ['Loot ka expert, fight ka guest appearance.','Rank push ka josh high, landing ka result unexpected.','Footsteps sunte hi full team meditation mode mein.','Revive ka button iske liye family member jaisa hai.','Squad ka confidence booster, bas result surprise hota hai.'],
+ ['Camper nahi, tactical furniture ban chuka hai.','Scope khola aur enemy ne match hi khatam kar diya.','Bhai ka favourite move: perfect timing par galat direction.','Booyah ka vision clear, execution thoda experimental.','Enemy ko dekhkar pehle game se permission leta hai.'],
+ ['Headshot ka target set, helmet ne request reject kar di.','Bhai ka movement dekhkar joystick bhi confused hai.','Solo vs squad nahi, solo vs apni kismat chal rahi hai.','Game mein entry cinematic, exit instant.','Squad isko carry nahi karti, sambhal kar rakhti hai.']
+];
+$('makeAura').addEventListener('click',()=>{
+ const uid=$('auraUid').value.trim();if(!/^[0-9]{6,15}$/.test(uid))return toast('Enter a numeric UID with 6–15 digits');
+ let seed=0;for(let i=0;i<uid.length;i++)seed=(seed*31+uid.charCodeAt(i))>>>0;
+ const chosen=[];let x=seed||1;for(let i=0;i<3;i++){x=(x*1664525+1013904223)>>>0;const pool=auraLinePools[(x>>>8)%auraLinePools.length];const line=pool[(x>>>16)%pool.length];chosen.push(line);}
+ $('auraResults').innerHTML=`<div class="result"><b>PLAYER AURA — UID ${safe(uid)}</b><small>Player aura report</small></div>`+chosen.map((line,i)=>`<div class="resultrow"><span><b>${['Play Style','Battle Habit','Squad Impression'][i]}</b><br>${safe(line)}</span></div>`).join('')+`<button class="btn small copy" data-copy="Player Aura for UID ${safe(uid)}: ${safe(chosen.join(' | '))}">Copy result</button>`;
+});
 document.addEventListener('click',e=>{const b=e.target.closest('.copy');if(b)copyText(b.dataset.copy||'')});
 
 // Bio builder
@@ -185,6 +238,16 @@ $('boosterList').innerHTML=tips.map((x,i)=>`<label class="resultrow"><span>${saf
 $('saveBooster').addEventListener('click',()=>{const done=[...$('boosterList').querySelectorAll('input:checked')].length;$('boosterResult').textContent=`Checklist progress saved for this visit: ${done}/${tips.length} completed.`;put('booster', [...$('boosterList').querySelectorAll('input')].map(x=>x.checked))});
 const oldTips=get('booster',[]);$('boosterList').querySelectorAll('input').forEach((x,i)=>x.checked=!!oldTips[i]);
 
+// Match-preparation animation with gradual 1–2% increments; no device settings are changed.
+$('boostDemoBtn').addEventListener('click',()=>{
+ const btn=$('boostDemoBtn'),bar=$('boostProgress'),pct=$('boostPercent'),status=$('boostStatus'),headline=$('boostHeadline');
+ if(btn.disabled)return;btn.disabled=true;btn.textContent='BOOSTING...';bar.style.width='0%';pct.textContent='0%';headline.textContent='Preparing your game session';
+ const stages=[{at:1,text:'Preparing your match session...'},{at:20,text:'Getting your game space ready...'},{at:45,text:'Building your focus...'},{at:72,text:'Final match preparation...'},{at:92,text:'Almost ready to battle...'}];let value=0;
+ const tick=()=>{value=Math.min(100,value+(Math.random()<0.42?2:1));bar.style.width=value+'%';pct.textContent=value+'%';const stage=[...stages].reverse().find(x=>value>=x.at);if(stage)status.textContent=stage.text;
+ if(value<100){setTimeout(tick,75+Math.floor(Math.random()*95));}else{headline.textContent='YOU ARE READY!';status.textContent='Match preparation complete. Take that confidence into your next game!';btn.disabled=false;btn.textContent='BOOST AGAIN';}};
+ setTimeout(tick,250);
+});
+
 // Loadout planner
 function renderLoadouts(){const arr=get('loadouts',[]);$('loadoutList').innerHTML=arr.length?arr.map((x,i)=>`<div class="resultrow"><span><b>${safe(x.character||'—')}</b><br><small>Pet: ${safe(x.pet||'—')} · Weapon: ${safe(x.weapon||'—')} · Role: ${safe(x.role||'—')}</small></span><button class="btn small" data-delete-loadout="${i}">Delete</button></div>`).join(''):'<div class="result">No loadouts saved yet.</div>'}
 $('saveLoadout').addEventListener('click',()=>{const x={character:$('loadChar').value.trim(),pet:$('loadPet').value.trim(),weapon:$('loadWeapon').value.trim(),role:$('loadRole').value.trim()};if(!Object.values(x).some(Boolean))return toast('Enter at least one detail');const arr=get('loadouts',[]);arr.push(x);put('loadouts',arr);renderLoadouts();toast('Loadout saved')});
@@ -202,24 +265,44 @@ $('runFun').addEventListener('click',()=>{const a=$('funName1').value.trim(),b=$
 
 
 
-// Login modal: front-end preview only; never stores or sends credentials.
-$('loginOpen').addEventListener('click',()=>{$('loginModal').classList.add('show');$('loginMessage').textContent='Secure login is not connected. Do not enter a real password.'});
+// Firebase Authentication integration. Add your Firebase web config below before use.
+const firebaseConfig = {
+  apiKey: "PASTE_FIREBASE_API_KEY",
+  authDomain: "PASTE_PROJECT_ID.firebaseapp.com",
+  projectId: "PASTE_PROJECT_ID",
+  appId: "PASTE_FIREBASE_APP_ID"
+};
+let auth=null, db=null, authMode='signin';
+const firebaseReady = firebaseConfig.apiKey !== 'PASTE_FIREBASE_API_KEY' && firebaseConfig.projectId !== 'PASTE_PROJECT_ID';
+$('heroUidPlayer').addEventListener('click',e=>{e.preventDefault();openTool('playeraura')});
+$('loginOpen').addEventListener('click',()=>{$('loginModal').classList.add('show');$('loginMessage').textContent=firebaseReady?'Enter your email and password to continue.':'Firebase setup is required before accounts can be used.'});
 $('loginClose').addEventListener('click',()=>$('loginModal').classList.remove('show'));
 $('loginModal').addEventListener('click',e=>{if(e.target===$('loginModal'))$('loginModal').classList.remove('show')});
-$('loginForm').addEventListener('submit',e=>{e.preventDefault();$('loginMessage').textContent='Demo only: authentication is not connected. To enable real visitor accounts, connect Firebase Authentication and authorized domains.'});
-$('signupMode').addEventListener('click',()=>$('loginMessage').textContent='Sign-up screen selected. Real account creation needs Firebase Authentication; no credentials are stored by this demo.');
-$('adminMode').addEventListener('click',()=>$('loginMessage').textContent='Admin access must be verified by a secure backend. A password hidden in public HTML is not secure, so no fake admin password is provided.');
-
-// UID profile demo output. The badge explicitly marks every field as sample data.
-$('uidDemoSearch').addEventListener('click',()=>{
- const uid=$('uidInput').value.trim();
- if(!/^[0-9]{6,15}$/.test(uid))return toast('Enter a valid-looking numeric UID (6–15 digits)');
- const region=$('uidRegion').value;
- const nick='SamplePlayer';
- const rows=[['UID',uid],['Nickname',nick],['Level','68'],['Likes','12,450'],['Rank','Heroic (sample)'],['Guild','DHEERAJ SQUAD (sample)'],['Pet','Sample pet']];
- $('uidResult').style.display='block';
- $('uidResult').innerHTML='<b>DEMO PROFILE — NOT LIVE DATA</b><div class="resultlist">'+rows.map(([k,v])=>`<div class="resultrow"><span>${safe(k)}</span><strong>${safe(v)}</strong></div>`).join('')+`</div><small>Selected region: ${safe(region)}. These values are placeholders, not information for this UID.</small>`;
+function setAuthMode(mode){authMode=mode;$('authSubmit').textContent=mode==='signup'?'Create account':'Sign In';$('authSubtitle').textContent=mode==='signup'?'Create your DHEERAJ HUB member account':'Sign in to your member account';$('loginPassword').autocomplete=mode==='signup'?'new-password':'current-password';$('loginMessage').textContent=mode==='signup'?'Use an email you can access. Password must be at least 6 characters.':'Enter your account details.'}
+$('signupMode').addEventListener('click',()=>setAuthMode('signup'));
+$('adminMode').addEventListener('click',async()=>{
+ if(!firebaseReady||!auth||!db)return $('loginMessage').textContent='Firebase setup is not complete yet.';
+ const user=auth.currentUser;if(!user)return $('loginMessage').textContent='Sign in with your admin account first.';
+ $('adminPanel').style.display='block';$('adminStatus').textContent='Checking secure admin permission…';
+ try{const snap=await db.collection('admins').doc(user.uid).get();if(snap.exists){$('adminStatus').textContent='Admin access verified for '+user.email;$('adminContent').textContent='Admin session active.';}else{$('adminStatus').textContent='Access denied. This account is not registered as an admin.';$('adminContent').textContent='Only an administrator UID added in Firestore can open this area.';}}
+ catch(err){$('adminStatus').textContent='Could not verify admin permission. Check Firestore setup and security rules.'}
 });
+$('logoutBtn').addEventListener('click',async()=>{if(auth)try{await auth.signOut()}catch(e){$('loginMessage').textContent=e.message}});
+$('loginForm').addEventListener('submit',async e=>{
+ e.preventDefault();if(!firebaseReady||!auth)return $('loginMessage').textContent='Firebase is not configured yet. Follow the setup steps before signing in.';
+ const email=$('loginEmail').value.trim(),password=$('loginPassword').value;
+ $('authSubmit').disabled=true;$('authSubmit').textContent='Please wait…';
+ try{if(authMode==='signup'){await auth.createUserWithEmailAndPassword(email,password);$('loginMessage').textContent='Account created successfully. You are signed in.';}else{await auth.signInWithEmailAndPassword(email,password);$('loginMessage').textContent='Signed in successfully.';}}
+ catch(err){const messages={'auth/email-already-in-use':'This email already has an account. Sign in instead.','auth/invalid-email':'Enter a valid email address.','auth/weak-password':'Use a password with at least 6 characters.','auth/user-not-found':'No account found for this email. Create an account first.','auth/wrong-password':'Incorrect email or password.','auth/invalid-credential':'Incorrect email or password.','auth/too-many-requests':'Too many attempts. Try again later.'};$('loginMessage').textContent=messages[err.code]||err.message;}
+ finally{$('authSubmit').disabled=false;$('authSubmit').textContent=authMode==='signup'?'Create account':'Sign In'}
+});
+// Load Firebase SDK only after the user supplies their own Firebase project config.
+if(firebaseReady){
+ const a=document.createElement('script');a.src='https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js';a.onload=()=>{const b=document.createElement('script');b.src='https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js';b.onload=()=>{const c=document.createElement('script');c.src='https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js';c.onload=()=>{firebase.initializeApp(firebaseConfig);auth=firebase.auth();db=firebase.firestore();auth.onAuthStateChanged(user=>{$('logoutBtn').style.display=user?'inline-block':'none';$('loginMessage').textContent=user?'Signed in as '+user.email:'You are signed out.';$('loginOpen').textContent=user?'Account':'Login / Sign up';});};document.head.appendChild(c)};document.head.appendChild(b)};document.head.appendChild(a);
+}
+
+// Live UID profile data is not fabricated. The hero UID button now opens the working UID-based Player Aura tool.
+$('uidDemoSearch').addEventListener('click',()=>{toast('Live UID profile lookup needs a verified Free Fire data API. Use Player Aura for UID-based entertainment.');openTool('playeraura')});
 
 // Fill generators with editable examples so each tool has something visible immediately.
 $('nameInput').value='Dheeraj';
