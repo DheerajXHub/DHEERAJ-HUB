@@ -6,6 +6,23 @@
 <style>
 :root{--bg:#09090d;--panel:#12121a;--panel2:#191923;--line:#292936;--text:#f5f5f7;--muted:#a3a3b2;--red:#ff3c4d;--orange:#ff8b2b;--grad:linear-gradient(110deg,var(--red),var(--orange));--radius:18px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#681c273d,transparent 35%),var(--bg);color:var(--text);font:15px/1.55 Inter,system-ui,Segoe UI,Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}.wrap{width:min(1200px,92%);margin:auto}.top{position:sticky;top:0;z-index:30;background:#09090eef;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:10px;font-weight:1000;letter-spacing:1.1px;font-size:19px}.logo{height:40px;width:40px;border-radius:12px;background:var(--grad);display:grid;place-items:center;box-shadow:0 7px 25px #ff4a4a45;font-size:21px}.brand em{font-style:normal;color:var(--orange)}.navlinks{display:flex;gap:20px;color:#c7c7d0;font-size:13px;font-weight:750}.navlinks a:hover,.navlinks a.active{color:var(--orange)}.navright{display:flex;gap:8px;align-items:center}.btn,.iconbtn{border:1px solid var(--line);border-radius:11px;background:var(--panel2);color:var(--text);padding:10px 14px;font-weight:800}.btn:hover,.iconbtn:hover{filter:brightness(1.15);transform:translateY(-1px)}.btn.primary{border:0;background:var(--grad);color:#fff}.btn.small{padding:7px 10px;font-size:12px}.menu{display:none}.mobile{display:none;padding:0 0 12px}.mobile a{display:block;padding:9px;color:#ddd}.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;padding:70px 0 42px}.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid #ff754b55;background:#ff754b12;color:#ffae80;border-radius:99px;padding:7px 12px;font-size:11px;font-weight:900;letter-spacing:1.2px}.spark{height:7px;width:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 12px var(--orange)}h1{font-size:clamp(42px,6vw,74px);line-height:.98;letter-spacing:-3px;margin:20px 0}.grad{background:var(--grad);color:transparent;background-clip:text}.lead{color:var(--muted);font-size:17px;max-width:600px}.actions{display:flex;gap:11px;flex-wrap:wrap;margin:25px 0}.heroart{height:355px;border:1px solid #ff634a55;border-radius:28px;background:radial-gradient(circle at 50% 42%,#ff493a35,transparent 42%),linear-gradient(145deg,#25131a,#101017 68%);display:grid;place-items:center;position:relative;overflow:hidden}.heroart:before,.heroart:after{content:"";position:absolute;width:250px;height:250px;border:1px solid #ff654b55;border-radius:35px;transform:rotate(35deg)}.heroart:after{width:330px;height:330px;border-color:#ff654b22}.core{height:180px;width:180px;border-radius:50%;border:2px solid #ff7954;display:grid;place-items:center;font-size:65px;background:radial-gradient(circle,#38191d,#0e0d12 70%);box-shadow:0 0 65px #ff463d55;z-index:1}.artfoot{position:absolute;bottom:22px;left:25px;right:25px;display:flex;justify-content:space-between;color:#ffb28a;font-size:10px;font-weight:900;letter-spacing:1.4px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:25px}.stat{border:1px solid var(--line);border-radius:13px;padding:12px;background:#ffffff05}.stat b{display:block;font-size:20px}.stat small{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:.7px}.section{padding:43px 0}.head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:20px}.eyebrow{font-size:11px;color:var(--orange);font-weight:950;letter-spacing:1.6px}.head h2{font-size:clamp(26px,4vw,37px);letter-spacing:-1px;margin:4px 0}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card,.panel{background:linear-gradient(145deg,#171720,#101016);border:1px solid var(--line);border-radius:var(--radius);padding:18px;min-width:0}.card{transition:.2s}.card:hover{transform:translateY(-3px);border-color:#ff744e88}.ico{height:45px;width:45px;border-radius:13px;background:#ff633018;border:1px solid #ff744e44;display:grid;place-items:center;font-size:22px;margin-bottom:13px}.card h3,.panel h3{margin:0 0 5px}.card p,.panel p{margin:0;color:var(--muted);font-size:13px}.tag{display:inline-block;margin-top:12px;padding:3px 7px;border:1px solid #ff744e44;border-radius:6px;color:#ffae80;background:#ff744e12;font-size:10px;font-weight:900}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}.input,select,textarea{background:#0b0b11;border:1px solid var(--line);border-radius:10px;color:var(--text);padding:11px 12px;min-width:0;outline:none}.input:focus,select:focus,textarea:focus{border-color:#ff8059}.field .input{flex:1}.nick-option{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid #ffffff18}.nick-option:last-child{border-bottom:0}.nick-option span{overflow-wrap:anywhere}.result{margin-top:12px;padding:12px;border:1px dashed #ff754e66;background:#ff754e0d;border-radius:10px;color:#ffbd99;min-height:44px;overflow-wrap:anywhere}.search{width:min(290px,100%)}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{text-align:left;padding:11px;border-bottom:1px solid var(--line)}.table th{color:#ffad7c;font-size:11px;text-transform:uppercase}.tablewrap{overflow:auto}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}.tab{padding:8px 12px;border:1px solid var(--line);background:var(--panel);border-radius:9px;color:var(--muted);font-weight:800}.tab.active{background:#ff623b18;color:#ffad7c;border-color:#ff623b66}.notice{border:1px solid #ff9b3444;background:#ff9b340d;padding:14px 16px;border-radius:12px;color:#e7c8a9;font-size:12px}.footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:12px}.footrow{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.hidden{display:none!important}.admin-layout{display:grid;grid-template-columns:220px 1fr;gap:15px}.adminnav{display:grid;gap:7px;align-content:start}.adminnav button{text-align:left}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.formgrid>*{width:100%}.formgrid textarea{grid-column:1/-1}.hudstage{height:250px;position:relative;border:1px solid #555;border-radius:14px;background:linear-gradient(135deg,#23232c,#111);overflow:hidden;margin-top:12px}.hudbtn{position:absolute;border-radius:50%;width:48px;height:48px;background:#ff633b66;border:2px solid #ff9a68;display:grid;place-items:center;color:white;font-weight:900;touch-action:none;user-select:none}.quizopt{display:block;width:100%;text-align:left;margin:8px 0}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#24242d;border:1px solid #555;padding:10px 15px;border-radius:10px;z-index:60;box-shadow:0 10px 30px #0008}.empty{padding:20px;text-align:center;color:var(--muted)}
+
+/* UID player profile */
+.uid-panel{background:linear-gradient(145deg,#171720,#101016);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.uid-controls{display:grid;grid-template-columns:minmax(0,1fr) 180px auto;gap:10px;margin-top:15px}
+.uid-status{margin-top:12px;padding:11px 13px;border:1px solid #ff9b3444;background:#ff9b340d;border-radius:10px;color:#e7c8a9;font-size:12px}
+.profile-card{margin-top:16px;border:1px solid #ff744e55;border-radius:16px;overflow:hidden;background:linear-gradient(145deg,#1b171c,#101016)}
+.profile-top{display:flex;align-items:center;gap:14px;padding:18px;background:radial-gradient(circle at 15% 10%,#ff754e22,transparent 55%),#171720}
+.profile-avatar{width:68px;height:68px;flex:0 0 68px;border-radius:18px;border:1px solid #ff8b2b88;background:#ff754e12;display:grid;place-items:center;font-size:30px}
+.profile-name{font-size:21px;font-weight:950;overflow-wrap:anywhere}
+.profile-uid{font-size:12px;color:var(--muted);margin-top:3px}
+.profile-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;padding:14px}
+.profile-stat{padding:11px;border:1px solid var(--line);border-radius:11px;background:#ffffff05;min-width:0}
+.profile-stat small{display:block;color:var(--muted);font-size:10px;font-weight:850;letter-spacing:.7px;text-transform:uppercase}
+.profile-stat b{display:block;margin-top:4px;font-size:15px;overflow-wrap:anywhere}
+.profile-placeholder{color:var(--muted);font-weight:600}
+@media(max-width:620px){.uid-controls{grid-template-columns:1fr}.profile-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.uid-panel{padding:15px}}
+
 @media(max-width:900px){.navlinks{display:none}.menu{display:inline-block}.mobile:not(.hidden){display:block;background:#101016;border-top:1px solid #292933;padding:10px 0 14px}.hero{grid-template-columns:1fr;padding-top:48px}.heroart{height:270px}.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.nav{height:64px}.brand{font-size:16px}.hero{padding:38px 0 24px}.heroart{height:230px}h1{letter-spacing:-2px}.lead{font-size:15px}.grid,.two,.admin-layout{grid-template-columns:1fr}.head{align-items:start;flex-direction:column}.search{width:100%}.section{padding:32px 0}.formgrid{grid-template-columns:1fr}.formgrid textarea{grid-column:auto}.stats{gap:6px}.stat{padding:9px}.stat b{font-size:17px}}
 </style>
@@ -13,9 +30,9 @@
 <body>
 <header class="top"><div class="wrap nav">
 <a class="brand" href="#home"><span class="logo">D</span><span>DHEERAJ <em>HUB</em></span></a>
-<nav class="navlinks"><a href="#tools">TOOLS</a><a href="#database">DATABASE</a><a href="#guides">GUIDES</a><a href="#community">COMMUNITY</a><a href="#admin">ADMIN</a></nav>
+<nav class="navlinks"><a href="#tools">TOOLS</a><a href="#uid-profile">PLAYER PROFILE</a><a href="#database">DATABASE</a><a href="#guides">GUIDES</a><a href="#community">COMMUNITY</a><a href="#admin">ADMIN</a></nav>
 <div class="navright"><button class="btn" id="langBtn">हिंदी</button><button class="iconbtn menu" id="menuBtn">☰</button></div>
-</div><div class="wrap mobile hidden" id="mobileNav"><a href="#tools">Tools</a><a href="#database">Database</a><a href="#guides">Guides</a><a href="#community">Community</a><a href="#admin">Admin dashboard</a></div></header>
+</div><div class="wrap mobile hidden" id="mobileNav"><a href="#tools">Tools</a><a href="#uid-profile">Player Profile</a><a href="#database">Database</a><a href="#guides">Guides</a><a href="#community">Community</a><a href="#admin">Admin dashboard</a></div></header>
 <main id="home">
 <section class="wrap hero"><div><span class="pill"><i class="spark"></i><span data-en="FREE FIRE COMMUNITY & PLAYER HUB" data-hi="फ्री फायर कम्युनिटी और प्लेयर हब">FREE FIRE COMMUNITY & PLAYER HUB</span></span>
 <h1><span data-en="PLAY SMART." data-hi="समझदारी से खेलो।">PLAY SMART.</span><br><span class="grad" data-en="RISE HIGH." data-hi="आगे बढ़ो।">RISE HIGH.</span></h1>
@@ -31,6 +48,40 @@
 <div class="panel"><div class="ico">🎒</div><h3 data-en="Loadout planner" data-hi="लोडआउट प्लानर">Loadout planner</h3><p data-en="Save a character, pet and weapon combination idea." data-hi="कैरेक्टर, पेट और हथियार का कॉम्बिनेशन प्लान करें।">Save a character, pet and weapon combination idea.</p><div class="field"><input class="input" id="character" placeholder="Character"><input class="input" id="pet" placeholder="Pet"><input class="input" id="loadoutGun" placeholder="Weapon"><button class="btn primary" id="saveLoadout">Save loadout</button></div><div class="result" id="loadoutResult">Your loadout will appear here.</div></div>
 <div class="panel"><div class="ico">🎯</div><h3 data-en="Sensitivity notes" data-hi="सेंसिटिविटी नोट्स">Sensitivity notes</h3><p data-en="Record and compare your own tested settings." data-hi="अपनी टेस्ट की हुई सेटिंग्स सेव करें और तुलना करें।">Record and compare your own tested settings.</p><div class="field"><input class="input" id="device" placeholder="Device model"><input class="input" id="sensitivity" placeholder="Your settings / notes"><button class="btn primary" id="saveSens">Save</button></div><div class="result" id="sensResult">Saved locally in this browser.</div></div>
 </div></section>
+
+
+<section class="wrap section" id="uid-profile">
+  <div class="head"><div><div class="eyebrow">PLAYER LOOKUP</div><h2>Free Fire Player Profile</h2><p class="muted">Search a player by UID and region. Live lookup will be enabled after a secure API connection is configured.</p></div></div>
+  <div class="uid-panel">
+    <h3 style="margin:0 0 5px">UID Search</h3>
+    <p class="muted">Enter the player's numeric UID and choose their server region.</p>
+    <div class="uid-controls">
+      <input class="input" id="playerUid" inputmode="numeric" autocomplete="off" placeholder="Enter Free Fire UID" aria-label="Free Fire UID">
+      <select id="playerRegion" aria-label="Server region">
+        <option value="IND">India (IND)</option><option value="ID">Indonesia (ID)</option><option value="RU">Russia (RU)</option><option value="CIS">CIS</option><option value="TH">Thailand (TH)</option><option value="SG">Singapore (SG)</option><option value="BR">Brazil (BR)</option><option value="US">United States (US)</option><option value="VN">Vietnam (VN)</option><option value="TW">Taiwan (TW)</option><option value="ME">Middle East (ME)</option><option value="PK">Pakistan (PK)</option><option value="BD">Bangladesh (BD)</option>
+      </select>
+      <button class="btn primary" id="playerSearchBtn" type="button">Search</button>
+    </div>
+    <div class="uid-status" id="playerApiStatus" role="status">API NOT CONNECTED — Profile lookup is prepared but inactive. No player data is being requested yet.</div>
+    <div class="profile-card" id="playerProfileCard">
+      <div class="profile-top">
+        <div class="profile-avatar" aria-hidden="true">👤</div>
+        <div><div class="profile-name profile-placeholder">Player Name</div><div class="profile-uid">UID: <span class="profile-placeholder">Not available</span></div></div>
+      </div>
+      <div class="profile-grid">
+        <div class="profile-stat"><small>Level</small><b class="profile-placeholder">Not available</b></div>
+        <div class="profile-stat"><small>Likes</small><b class="profile-placeholder">Not available</b></div>
+        <div class="profile-stat"><small>Region</small><b id="profileRegionValue">IND</b></div>
+        <div class="profile-stat"><small>BR Rank</small><b class="profile-placeholder">Not available</b></div>
+        <div class="profile-stat"><small>CS Rank</small><b class="profile-placeholder">Not available</b></div>
+        <div class="profile-stat"><small>EXP</small><b class="profile-placeholder">Not available</b></div>
+        <div class="profile-stat"><small>Guild Name</small><b class="profile-placeholder">Not available</b></div>
+        <div class="profile-stat"><small>Guild Level</small><b class="profile-placeholder">Not available</b></div>
+        <div class="profile-stat"><small>Pet</small><b class="profile-placeholder">Not available</b></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="wrap section" id="database"><div class="head"><div><div class="eyebrow">EXPLORE THE GAME</div><h2 data-en="Game knowledge database" data-hi="गेम नॉलेज डेटाबेस">Game knowledge database</h2><p class="muted" data-en="Search the starter database or add your own entries from Admin." data-hi="डेटाबेस में खोजें या Admin से अपनी जानकारी जोड़ें।">Search the starter database or add your own entries from Admin.</p></div><input class="input search" id="dbSearch" placeholder="Search database..."></div>
 <div class="tabs" id="dbTabs"><button class="tab active" data-cat="All">All</button><button class="tab" data-cat="Weapons">Weapons</button><button class="tab" data-cat="Characters">Characters</button><button class="tab" data-cat="Pets">Pets</button><button class="tab" data-cat="Maps">Maps</button><button class="tab" data-cat="Vehicles">Vehicles</button></div>
@@ -121,5 +172,14 @@ let qi=0;function showQuiz(){$('quizQuestion').textContent=questions[qi][0];$('q
 $('nextQuiz').onclick=()=>{qi=(qi+1)%questions.length;showQuiz()};
 $('resetHud').onclick=()=>{let pos=[['8%','65%'],['78%','65%'],['68%','28%'],['15%','20%']];document.querySelectorAll('.hudbtn').forEach((b,i)=>{b.style.left=pos[i][0];b.style.top=pos[i][1]})};
 document.querySelectorAll('.hudbtn').forEach(b=>{b.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain','hud'));$('hudStage').addEventListener('dragover',e=>e.preventDefault());$('hudStage').addEventListener('drop',e=>{e.preventDefault();let r=$('hudStage').getBoundingClientRect();b.style.left=Math.max(0,Math.min(88,(e.clientX-r.left-24)/r.width*100))+'%';b.style.top=Math.max(0,Math.min(78,(e.clientY-r.top-24)/r.height*100))+'%'});});
+
+$('playerRegion').addEventListener('change',()=>{$('profileRegionValue').textContent=$('playerRegion').value});
+$('playerSearchBtn').onclick=()=>{
+  const uid=$('playerUid').value.trim();
+  if(!/^\d+$/.test(uid)){toast('Enter a valid numeric UID');return}
+  $('playerApiStatus').textContent='API NOT CONNECTED — Search is inactive until a secure API backend is configured.';
+  toast('Player lookup is not connected yet');
+};
+
 renderAll();showQuiz();
 </script></body></html>
