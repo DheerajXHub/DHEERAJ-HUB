@@ -105,13 +105,14 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
 
 #mobileNav #adminMenuOpen{display:block;color:#e9e8ff;border:1px solid #6655a5;background:linear-gradient(120deg,#2a2147,#151b2b);padding:12px 14px;border-radius:12px}
 #mobileNav a{cursor:pointer}
+.hamburger-lines{display:flex;flex-direction:column;gap:4px;width:18px}.hamburger-lines i{display:block;width:18px;height:2px;border-radius:2px;background:currentColor}
 </style>
 </head>
 <body>
 <header><div class="wrap nav">
 <a class="brand" href="#home"><span class="logo">D</span><span>DHEERAJ <em>HUB</em></span></a>
 <nav class="links"><a href="#tools">TOOLS</a><a href="#uid">UID PLAYER</a><a href="#about">ABOUT</a></nav>
-<div class="navright"><button class="btn small" id="loginOpen">Login / Sign up</button><button class="iconbtn" id="memberAvatar" type="button" title="Member account" style="display:none;border-radius:50%;width:40px;height:40px;padding:0;font-weight:800"></button><button class="iconbtn" id="adminBrandLogo" type="button" title="DHEERAJ HUB Admin" style="display:none;border-radius:12px;width:42px;height:42px;padding:0;font-weight:900;color:#fff;background:linear-gradient(135deg,#8b5cf6,#06b6d4)">D</button><button class="iconbtn menu" id="menuBtn" aria-label="Open menu">⋮</button></div>
+<div class="navright"><button class="btn small" id="loginOpen">Login / Sign up</button><button class="iconbtn" id="memberAvatar" type="button" title="Member account" style="display:none;border-radius:50%;width:40px;height:40px;padding:0;font-weight:800"></button><button class="iconbtn" id="adminBrandLogo" type="button" title="DHEERAJ HUB Admin" style="display:none;border-radius:12px;width:42px;height:42px;padding:0;font-weight:900;color:#fff;background:linear-gradient(135deg,#8b5cf6,#06b6d4)">D</button><button class="iconbtn menu" id="menuBtn" aria-label="Open menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button></div>
 </div><nav class="wrap mobile" id="mobileNav" style="display:none"><a href="#tools">Tools</a><a href="#uid">UID Player</a><a href="#about">About</a><button class="btn small" id="adminMenuOpen" type="button" style="width:100%;text-align:left;margin-top:8px">Admin Panel</button></nav></header>
 <main id="home">
 <section class="wrap hero"><div><span class="pill"><i class="dot"></i> FREE FIRE COMMUNITY TOOLKIT</span><h1>PLAY SMART.<br><span class="grad">RISE HIGH.</span></h1><p class="lead">Your gaming space for stylish names, bio designs, symbols, sensitivity planning and fun mini tools — all in one place.</p><div class="actions"><a class="btn primary" href="#tools">Explore tools →</a><a class="btn" href="#tools" id="heroUidPlayer">UID Player</a></div><div class="stats"><div class="stat"><b>12+</b><small>LOCAL TOOLS</small></div><div class="stat"><b>0</b><small>API KEYS NEEDED</small></div><div class="stat"><b>2</b><small>LANGUAGES</small></div></div></div><div class="art"><div class="core">⚡</div><div class="artfoot"><span>DHEERAJ HUB</span><span>PLAYER TOOLKIT</span></div></div></section>
@@ -119,7 +120,7 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
 <div class="toolgrid" id="toolGrid">
 <button class="toolcard" data-open="names"><span class="ico">Aa</span><span><b>FF Names Pro</b><small>Stylish nickname generator</small></span></button>
 <button class="toolcard" data-open="idprice"><span class="ico">💎</span><span><b>FF ID Price Calculator</b><small>Prime level and total top-up value</small></span></button>
-<button class="toolcard" data-open="playeraura"><span class="ico">👤</span><span><b>Player Aura</b><small>Enter UID to reveal player aura</small></span></button>
+<button class="toolcard" data-open="uidinfo"><span class="ico">🆔</span><span><b>FF UID Info</b><small>UID information preview (API required for live data)</small></span></button><button class="toolcard" data-open="playeraura"><span class="ico">👤</span><span><b>Player Aura</b><small>Enter UID to reveal player aura</small></span></button>
 <button class="toolcard" data-open="booster"><span class="ico">🚀</span><span><b>FF Game Booster</b><small>Get match-ready</small></span></button>
 <button class="toolcard" data-open="bio"><span class="ico">📖</span><span><b>FF Aura Bio</b><small>Colourful bio code maker</small></span></button>
 <button class="toolcard" data-open="fonts"><span class="ico">𝓐</span><span><b>Stylish Text</b><small>Fancy font converter</small></span></button>
@@ -149,7 +150,7 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
 <div class="notice" style="margin-top:12px"><b>India pricing note:</b> Diamond pack rates are reference estimates, not live verified prices. Actual in-game prices, bonus diamonds and offers may differ. Estimated top-up spending is not a guaranteed account selling price. Never share passwords or OTPs.</div>
 </div>
 
-<div class="panel toolview" id="view-playeraura"><h3>Player Aura</h3><p>Enter a player UID to reveal their aura.</p><div class="field"><input class="input" id="auraUid" type="text" inputmode="numeric" maxlength="15" placeholder="Enter Free Fire UID"><button class="btn primary" id="makeAura">Check Aura</button></div><div class="resultlist" id="auraResults"><div class="result">Enter a UID to reveal the player aura.</div></div><div class="notice">Player Aura is a UID-based entertainment result, not verified rank, skill or match-history data.</div></div>
+<div class="panel toolview" id="view-uidinfo"><h3>FF UID Info</h3><p>Enter a Free Fire UID and region. This tool is included in the third position, but live account details require a legitimate Free Fire data API.</p><div class="field"><input class="input" id="ffInfoUid" inputmode="numeric" maxlength="20" placeholder="Enter Free Fire UID"><select class="input" id="ffInfoRegion"><option value="IND">India (IND)</option><option value="ID">Indonesia (ID)</option><option value="RU">Russia (RU)</option><option value="CIS">CIS</option><option value="TH">Thailand (TH)</option><option value="BR">Brazil (BR)</option><option value="SG">Singapore (SG)</option></select></div><button class="btn primary" id="ffInfoCheck" type="button" style="margin-top:10px">Check UID</button><div class="result" id="ffInfoResult" style="margin-top:12px">Enter a UID to see the lookup status.</div><div class="notice">Without an API, this tool can validate the entered UID format and selected region only. It will not invent player name, level, likes, rank or statistics.</div></div><div class="panel toolview" id="view-playeraura"><h3>Player Aura</h3><p>Enter a player UID to reveal their aura.</p><div class="field"><input class="input" id="auraUid" type="text" inputmode="numeric" maxlength="15" placeholder="Enter Free Fire UID"><button class="btn primary" id="makeAura">Check Aura</button></div><div class="resultlist" id="auraResults"><div class="result">Enter a UID to reveal the player aura.</div></div><div class="notice">Player Aura is a UID-based entertainment result, not verified rank, skill or match-history data.</div></div>
 
 <div class="panel toolview" id="view-bio"><h3>Bio Code Studio</h3><p>Type your bio, choose a colour style and copy the generated code. Game support for colours may vary.</p><textarea class="input" id="bioInput" rows="3" maxlength="120" placeholder="Type your bio..."></textarea><div class="chips" id="bioColors"><button class="chip active" data-color="red">RED</button><button class="chip" data-color="yellow">YELLOW</button><button class="chip" data-color="blue">BLUE</button><button class="chip" data-color="green">GREEN</button><button class="chip" data-color="pink">PINK</button><button class="chip" data-color="gold">GOLD</button><button class="chip" data-color="bold">BOLD</button></div><div class="preview" id="bioPreview">Preview...</div><button class="btn pink" id="copyBio" style="width:100%;margin-top:12px">COPY BIO CODE</button></div>
 
@@ -251,7 +252,7 @@ const safe=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;
 const copyText=async(text)=>{try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text)}else{const x=document.createElement('textarea');x.value=text;x.style.position='fixed';x.style.opacity='0';document.body.appendChild(x);x.select();const ok=document.execCommand('copy');x.remove();if(!ok)throw Error('copy failed')}toast('Copied to clipboard')}catch(e){toast('Copy unavailable on this browser')}};
 const get=(k,d)=>{try{return JSON.parse(localStorage.getItem('dhv2_'+k))??d}catch(e){return d}};
 const put=(k,v)=>{try{localStorage.setItem('dhv2_'+k,JSON.stringify(v));return true}catch(e){toast('Browser storage unavailable');return false}};
-const toolNames={names:'FF Names Pro',idprice:'FF ID Price Calculator',playeraura:'Player Aura',bio:'FF Aura Bio',fonts:'Stylish Text',symbols:'FF Symbols',qr:'QR Maker',device:'Device Sensi',sensi:'VIP Sensi Builder',booster:'FF Game Booster',loadout:'Loadout Planner',quiz:'Noob Guess Quiz',fun:'Fun Match',uid:'UID Player Profile'};
+const toolNames={names:'FF Names Pro',idprice:'FF ID Price Calculator',uidinfo:'FF UID Info',playeraura:'Player Aura',bio:'FF Aura Bio',fonts:'Stylish Text',symbols:'FF Symbols',qr:'QR Maker',device:'Device Sensi',sensi:'VIP Sensi Builder',booster:'FF Game Booster',loadout:'Loadout Planner',quiz:'Noob Guess Quiz',fun:'Fun Match',uid:'UID Player Profile'};
 let pendingToolId=null, authInitialized=false;
 function openTool(id){if(!authInitialized || !auth || !auth.currentUser){pendingToolId=id;$('loginModal').classList.add('show');$('loginMessage').textContent=firebaseReady?'Sign in or create an account to use DHEERAJ HUB tools.':'Firebase setup is incomplete. Add your Web API key to enable member sign-in.';return;}document.querySelectorAll('.toolview').forEach(x=>x.classList.remove('active'));const v=$('view-'+id);if(!v)return;v.classList.add('active');$('toolArea').style.display='block';$('toolTitle').textContent=toolNames[id];$('tools').style.display='none';$('toolArea').scrollIntoView({behavior:'smooth'});if(id==='quiz'&&!quizStarted)showQuestion()}
 function backTools(){$('toolArea').style.display='none';$('tools').style.display='block';$('tools').scrollIntoView({behavior:'smooth'})}
@@ -261,6 +262,12 @@ $('menuBtn').addEventListener('click',()=>{const n=$('mobileNav');n.style.displa
 $('mobileNav').querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{$('mobileNav').style.display='none'}));
 
 
+// FF UID Info: safe local validation; live profile fields require an API.
+$('ffInfoCheck').addEventListener('click',()=>{
+ const uid=$('ffInfoUid').value.trim(), region=$('ffInfoRegion').value;
+ if(!/^\\d{5,20}$/.test(uid)){ $('ffInfoResult').textContent='Please enter a valid numeric UID (5–20 digits).'; return; }
+ $('ffInfoResult').textContent='UID format is valid. Region: '+region+'. Live player information is unavailable until a verified data API is connected.';
+});
 // FF Name styles
 const nicknameDecorations=[n=>`亗 ${n} 亗`,n=>`꧁༺ ${n} ༻꧂`,n=>`『${n}』メ`,n=>`乂${n}乂`,n=>`么${n}么`,n=>`★彡${n}彡★`,n=>`♛ ${n} ♛`,n=>`ツ${n}ツ`,n=>`◤${n}◢`,n=>`メ ${n} メ`,n=>`么${n}亗`,n=>`×͜× ${n}`,n=>`亗${n}々`,n=>`『亗』${n}`,n=>`༄${n}࿐`,n=>`乛${n}乛`,n=>`♠${n}♠`,n=>`⚡${n}⚡`,n=>`•${n}•`,n=>`亗『${n}』`,n=>`꧁${n}ツ`,n=>`彡${n}彡`,n=>`✦${n}✦`,n=>`☯ ${n} ☯`,n=>`么 ${n} 么`,n=>`〆${n}`,n=>`${n}✓`,n=>`ᏦᎥᏁᏳ ${n}`,n=>`乂 ${n} 亗`,n=>`★${n}★`];
 function generateNicknames(){const n=$('nameInput').value.trim();if(!n)return toast('Enter a nickname first');const styles=nicknameDecorations.map(fn=>fn(n));$('nameResults').innerHTML=styles.map(s=>`<div class="resultrow"><strong>${safe(s)}</strong><button class="btn small copy" type="button" data-copy="${safe(s)}">Copy</button></div>`).join('')}
@@ -486,8 +493,8 @@ $('adminDeviceCopy').addEventListener('click',()=>copyText(installationId));
 $('copyAdminDeviceId').addEventListener('click',()=>copyText(installationId));
 
 let adminVerified=false;
-async $('copyLocalDevice').addEventListener('click',()=>copyText(installationId));
-function loadVisitorAccounts(){
+$('copyLocalDevice').addEventListener('click',()=>copyText(installationId));
+async function loadVisitorAccounts(){
  if(!adminVerified||!adminFunctions){$('visitorStatus').textContent='Admin verification is required or the Admin Functions SDK is unavailable.';return;}
  $('visitorStatus').textContent='Loading visitor accounts…';
  $('visitorRows').innerHTML='<tr><td colspan="6">Loading…</td></tr>';
