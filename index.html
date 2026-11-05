@@ -323,13 +323,13 @@ $('runFun').addEventListener('click',()=>{const a=$('funName1').value.trim(),b=$
 
 // Firebase Authentication integration. Firebase project configuration for DHEERAJ HUB.
 const firebaseConfig = {
-  apiKey: "PASTE_YOUR_FIREBASE_WEB_API_KEY_HERE",
+  apiKey: "AIzaSyCY9J-PVhdCh3AWzuvJzzy_iRVfH5Onp5Q",
   authDomain: "dheeraj-hub.firebaseapp.com",
   projectId: "dheeraj-hub",
   appId: "1:811297970814:web:754b56ffbfa3cec23d62f"
 };
 let auth=null, db=null, authMode='signin';
-const firebaseReady = firebaseConfig.apiKey !== 'PASTE_YOUR_FIREBASE_WEB_API_KEY_HERE' && firebaseConfig.projectId === 'dheeraj-hub';
+const firebaseReady = firebaseConfig.apiKey !== 'AIzaSyCY9J-PVhdCh3AWzuvJzzy_iRVfH5Onp5Q' && firebaseConfig.projectId === 'dheeraj-hub';
 $('heroUidPlayer').addEventListener('click',e=>{e.preventDefault();openTool('uid')});
 $('loginOpen').addEventListener('click',()=>{$('loginModal').classList.add('show');$('loginMessage').textContent=firebaseReady?'Enter your email and password to continue.':'Firebase setup is required before accounts can be used.'});
 $('loginClose').addEventListener('click',()=>$('loginModal').classList.remove('show'));
