@@ -27,33 +27,90 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
 .modalback{position:fixed;inset:0;background:#050610d9;backdrop-filter:blur(8px);z-index:70;display:none;align-items:center;justify-content:center;padding:16px}
 .modalback.show{display:flex}.loginbox{width:min(440px,100%);border:1px solid #6655a5;border-radius:26px;padding:24px;background:radial-gradient(circle at 50% 0%,#4a267a66,transparent 45%),#111522;box-shadow:0 25px 80px #0009}
 .loginbox h2{font-size:30px;margin:8px 0}.loginbox .input{margin:7px 0}.loginfoot{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-top:14px;flex-wrap:wrap}
-</style>
 
-<style>
+.adminPanel{display:none}.adminPanel.show{display:block}.adminGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.adminTile{padding:14px;border:1px solid #414966;border-radius:15px;background:#0e1220;overflow-wrap:anywhere}
+@media(max-width:620px){.adminGrid{grid-template-columns:1fr}}
 
-/* V13 login outer phone-frame outline */
-@media(max-width:480px){
-  #loginModal .loginbox{
-    border:1px solid #8b70d8;
-    border-radius:26px;
-    box-shadow:0 0 0 3px #8b70d833,0 25px 80px #0009;
-  }
+/* V13 mobile login refinement */
+.modalback{
+  padding:clamp(10px,3vw,20px);
+  align-items:center;
+  overflow-y:auto;
+  overscroll-behavior:contain;
 }
+.loginbox{
+  width:min(420px,100%);
+  max-height:calc(100dvh - 24px);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding:clamp(16px,4vw,24px);
+  border-radius:22px;
+  scrollbar-width:thin;
+}
+.loginbox .backrow{margin-bottom:10px}
+.loginbox .core{
+  width:58px!important;height:58px!important;
+  font-size:24px!important;margin:8px auto 12px!important;
+}
+.loginbox h2{
+  font-size:clamp(23px,5.8vw,29px);
+  line-height:1.15;
+  letter-spacing:-.5px;
+  margin:7px 0 5px;
+}
+.loginbox p{
+  font-size:14px;
+  line-height:1.45;
+  margin:7px 0 15px;
+}
+.loginbox label{
+  display:block;
+  font-size:13px;
+  font-weight:600;
+  color:#dce0f1;
+  margin-top:10px;
+}
+.loginbox .input{
+  min-height:48px;
+  padding:12px 14px;
+  border-radius:13px;
+  margin:5px 0 2px;
+  font-size:15px;
+}
+.loginbox .btn{min-height:46px;border-radius:13px}
+.loginbox .loginfoot{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.loginbox .loginfoot .btn{width:100%;white-space:normal}
+.loginbox .notice{font-size:12px;line-height:1.45;padding:11px;margin-top:12px!important}
+@media(max-width:620px){
+  .modalback{padding:9px;align-items:center}
+  .loginbox{max-height:calc(100dvh - 18px);padding:16px;border-radius:19px}
+  .loginbox h2{font-size:24px}
+  .loginbox p{font-size:13px}
+  .loginbox .input{min-height:46px}
+  .loginbox .loginfoot{grid-template-columns:1fr 1fr}
+}
+@media(max-height:650px){
+  .modalback{align-items:flex-start}
+  .loginbox{max-height:calc(100dvh - 16px)}
+  .loginbox .core{display:none}
+}
+
 </style>
 </head>
 <body>
 <header><div class="wrap nav">
 <a class="brand" href="#home"><span class="logo">D</span><span>DHEERAJ <em>HUB</em></span></a>
 <nav class="links"><a href="#tools">TOOLS</a><a href="#uid">UID PLAYER</a><a href="#about">ABOUT</a></nav>
-<div class="navright"><button class="btn small" id="loginOpen">Login / Sign up</button><button class="iconbtn menu" id="menuBtn">☰</button></div>
+<div class="navright"><button class="btn small" id="adminOpen">Admin</button><button class="btn small" id="loginOpen">Login / Sign up</button><button class="iconbtn menu" id="menuBtn">☰</button></div>
 </div><nav class="wrap mobile" id="mobileNav" style="display:none"><a href="#tools">Tools</a><a href="#uid">UID Player</a><a href="#about">About</a></nav></header>
 <main id="home">
-<section class="wrap hero"><div><span class="pill"><i class="dot"></i> FREE FIRE COMMUNITY TOOLKIT</span><h1>PLAY SMART.<br><span class="grad">RISE HIGH.</span></h1><p class="lead">Your gaming space for stylish names, bio designs, symbols, sensitivity planning and fun mini tools — all in one place.</p><div class="actions"><a class="btn primary" href="#tools">Explore tools →</a><a class="btn" href="#tools" id="heroUidPlayer">UID Player</a><a class="btn pink" id="downloadAppBtn" href="https://github.com/DheerajXHub/DHEERAJ-HUB-ANDROID-/releases/latest/download/DHEERAJ%20HUB.apk" target="_blank" rel="noopener">⬇ Download DHEERAJ HUB App</a></div><div class="stats"><div class="stat"><b>12+</b><small>LOCAL TOOLS</small></div><div class="stat"><b>0</b><small>API KEYS NEEDED</small></div><div class="stat"><b>2</b><small>LANGUAGES</small></div></div><p class="muted" id="appDownloadNote" style="font-size:12px;margin-top:12px">App download: V13 APK link will work after the APK is published in GitHub Releases.</p></div><div class="art"><div class="core">⚡</div><div class="artfoot"><span>DHEERAJ HUB</span><span>PLAYER TOOLKIT</span></div></div></section>
+<section class="wrap hero"><div><span class="pill"><i class="dot"></i> FREE FIRE COMMUNITY TOOLKIT</span><h1>PLAY SMART.<br><span class="grad">RISE HIGH.</span></h1><p class="lead">Your gaming space for stylish names, bio designs, symbols, sensitivity planning and fun mini tools — all in one place.</p><div class="actions"><a class="btn primary" href="#tools">Explore tools →</a><a class="btn" href="#tools" id="heroUidPlayer">UID Player</a></div><div class="stats"><div class="stat"><b>12+</b><small>LOCAL TOOLS</small></div><div class="stat"><b>0</b><small>API KEYS NEEDED</small></div><div class="stat"><b>2</b><small>LANGUAGES</small></div></div></div><div class="art"><div class="core">⚡</div><div class="artfoot"><span>DHEERAJ HUB</span><span>PLAYER TOOLKIT</span></div></div></section>
 <section class="wrap section" id="tools"><div class="eyebrow">PICK A TOOL</div><h2 class="heading">Gaming tools</h2><p class="muted">Choose a tool. All local tools work in your browser without a login or API key.</p>
 <div class="toolgrid" id="toolGrid">
 <button class="toolcard" data-open="names"><span class="ico">Aa</span><span><b>FF Names Pro</b><small>Stylish nickname generator</small></span></button>
 <button class="toolcard" data-open="idprice"><span class="ico">💎</span><span><b>FF ID Price Calculator</b><small>Prime level and total top-up value</small></span></button>
-<button class="toolcard" data-open="uid"><span class="ico">🔎</span><span><b>FF UID Info</b><small>Player profile lookup by UID</small></span></button>
+<button class="toolcard" data-open="playeraura"><span class="ico">👤</span><span><b>Player Aura</b><small>Enter UID to reveal player aura</small></span></button>
 <button class="toolcard" data-open="booster"><span class="ico">🚀</span><span><b>FF Game Booster</b><small>Get match-ready</small></span></button>
 <button class="toolcard" data-open="bio"><span class="ico">📖</span><span><b>FF Aura Bio</b><small>Colourful bio code maker</small></span></button>
 <button class="toolcard" data-open="fonts"><span class="ico">𝓐</span><span><b>Stylish Text</b><small>Fancy font converter</small></span></button>
@@ -66,7 +123,6 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
 <button class="toolcard" data-open="quiz"><span class="ico">💀</span><span><b>Noob Guess Quiz</b><small>Quick Free Fire knowledge quiz</small></span></button>
 <button class="toolcard" data-open="fun"><span class="ico">🤝</span><span><b>Fun Match</b><small>Just-for-fun friendship score</small></span></button>
 <button class="toolcard" data-open="playeraura"><span class="ico">👤</span><span><b>UID Player Aura</b><small>Enter UID to reveal player aura</small></span></button>
-
 </div></section>
 
 <section class="wrap section" id="toolArea" style="display:none">
@@ -106,20 +162,7 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
 
 <div class="panel toolview" id="view-fun"><h3>Fun Match</h3><p>Just a random entertainment score. It does not measure real friendship or compatibility.</p><div class="two"><input class="input" id="funName1" placeholder="Name 1"><input class="input" id="funName2" placeholder="Name 2"></div><button class="btn primary" id="runFun" style="margin-top:12px">Calculate fun score</button><div class="result" id="funResult">Your fun score will appear here.</div></div>
 
-<div class="panel toolview" id="view-uid"><h3>FF UID Info — Player Profile</h3>
-<p>Enter a Free Fire UID and select its region to open the player information panel.</p>
-<div class="field"><input class="input" id="uidInput" inputmode="numeric" maxlength="15" placeholder="Enter Free Fire UID"><select class="input" id="uidRegion"><option value="IND">India (IND)</option><option value="ID">Indonesia (ID)</option><option value="RU">Russia (RU)</option><option value="CIS">CIS</option><option value="TH">Thailand (TH)</option><option value="SG">Singapore (SG)</option><option value="BR">Brazil (BR)</option></select></div>
-<button class="btn primary" id="uidDemoSearch" style="margin-top:10px;width:100%">Get UID Info</button>
-<div class="resultlist" id="uidResult" style="margin-top:12px">
-<div class="result"><b>PLAYER PROFILE</b><br><small>UID: —</small></div>
-<div class="resultrow"><span><b>Player Name</b><br>Waiting for UID lookup</span><span>—</span></div>
-<div class="resultrow"><span><b>Level</b><br>Account level</span><span>—</span></div>
-<div class="resultrow"><span><b>Region</b><br>Selected server</span><span>—</span></div>
-<div class="resultrow"><span><b>Likes</b><br>Profile likes</span><span>—</span></div>
-<div class="resultrow"><span><b>Rank</b><br>Current rank</span><span>—</span></div>
-<div class="resultrow"><span><b>Last updated</b></span><span>—</span></div>
-</div>
-<div class="notice" style="margin-top:12px">UID Info interface is added, but live player data is not connected yet. The lookup button will show a clear status message until a verified Free Fire data API/backend is configured. No sample values are presented as real account data. Never enter your game password or OTP here.</div></div>
+<div class="panel toolview" id="view-uid"><h3>UID Player Profile</h3><p>UID profile lookup is intentionally inactive until a reliable data source is configured. No fake player details will be shown.</p><div class="field"><input class="input" id="uidInput" inputmode="numeric" placeholder="Enter Free Fire UID"><select class="input" id="uidRegion"><option>India (IND)</option><option>Indonesia (ID)</option><option>Russia (RU)</option><option>CIS</option><option>Thailand (TH)</option><option>Singapore (SG)</option><option>Brazil (BR)</option></select></div><button class="btn primary" id="uidDemoSearch" style="margin-top:10px">Preview profile layout</button><div class="notice" style="margin-top:12px">This preview uses clearly marked sample data only. It does not fetch a real Free Fire account. A working API/backend is still required for live UID results.</div><div class="result" id="uidResult" style="display:none"></div></div>
 </section>
 
 <section class="wrap section" id="about"><div class="notice"><b>About DHEERAJ HUB:</b> Fan-made Free Fire companion. Local tools run in your browser and do not need your game login, password, OTP or API key. This site is not affiliated with Garena. Live UID profile lookup requires a verified data API. Member sign-in requires Firebase setup. QR generation may need an internet connection to load its browser library.</div></section>
@@ -140,9 +183,38 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
   <div class="loginfoot"><button class="btn small" id="signupMode" type="button">Create account</button><button class="btn small" id="forgotPassword" type="button">Forgot password?</button></div>
   <button class="btn small" id="logoutBtn" type="button" style="display:none;margin-top:12px">Sign out</button>
   <div class="notice" id="loginMessage" style="margin-top:14px">Set up Firebase using the setup instructions before enabling member accounts.</div>
-  <div class="notice" style="margin-top:12px">Admin controls are intentionally not exposed in the member login. Owner access will be enabled only after server-side verification and approved-device enrollment are deployed.</div>
  </div>
 </div>
+
+<div class="modalback" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+ <div class="loginbox">
+  <div class="backrow"><span class="pill"><i class="dot"></i> OWNER ACCESS</span><button class="iconbtn" id="adminClose" aria-label="Close">✕</button></div>
+  <h2 id="adminTitle" style="text-align:center">Admin Login</h2>
+  <p style="text-align:center">Sign in with your owner account. Admin access is checked by the secure backend.</p>
+  <form id="adminLoginForm">
+   <label>Admin email</label><input class="input" id="adminEmail" type="email" autocomplete="username" placeholder="Owner email" required>
+   <label>Password</label><input class="input" id="adminPassword" type="password" autocomplete="current-password" placeholder="Your password" required>
+   <button class="btn primary" id="adminSubmit" type="submit" style="width:100%;margin-top:12px">Verify Admin</button>
+  </form>
+  <div class="notice" id="adminMessage" style="margin-top:14px">Admin verification requires the deployed Cloud Function and an approved device.</div>
+  <button class="btn small" id="adminDeviceCopy" type="button" style="margin-top:10px">Copy this device installation ID</button>
+ </div>
+</div>
+
+<section class="wrap section adminPanel" id="adminPanel">
+ <div class="panel">
+  <div class="backrow"><div><div class="eyebrow">OWNER CONTROL CENTER</div><h2 class="heading">DHEERAJ HUB Admin Panel</h2></div><button class="btn small" id="adminLogout">Sign out</button></div>
+  <p class="muted">Admin access is verified by Firebase Authentication and the server-side approved-device list.</p>
+  <div class="adminGrid">
+   <div class="adminTile"><b>Admin account</b><div id="adminAccount">—</div></div>
+   <div class="adminTile"><b>Firebase UID</b><div id="adminUid">—</div></div>
+   <div class="adminTile"><b>Approved installation</b><div id="adminDeviceStatus">Verified</div></div>
+   <div class="adminTile"><b>Installation ID</b><div id="adminDeviceId">—</div><button class="btn small" id="copyAdminDeviceId" style="margin-top:8px">Copy ID</button></div>
+  </div>
+  <div class="notice" style="margin-top:14px">Admin panel foundation is active. Member passwords are never displayed or stored by this page. Add future admin actions through authenticated Cloud Functions; never put secret keys or passwords in this HTML.</div>
+ </div>
+</section>
+
 <footer><div class="wrap">DHEERAJ HUB · Play smart. Rise high. · Independent fan project.<div style="margin-top:16px;font-weight:700;color:#f5f6ff">FOLLOW US</div>
  <a class="btn small" href="https://www.instagram.com/zz.dheeraj.01/" target="_blank" rel="noopener noreferrer" aria-label="Open DHEERAJ HUB Instagram profile" style="display:inline-flex;align-items:center;gap:9px;margin-top:14px;text-decoration:none">
   <svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="igGradient" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFB13D"/><stop offset="0.48" stop-color="#E1306C"/><stop offset="1" stop-color="#833AB4"/></linearGradient></defs><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="url(#igGradient)" stroke-width="2.3"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="url(#igGradient)" stroke-width="2.1"/><circle cx="17.7" cy="6.5" r="1.3" fill="#E1306C"/></svg>
@@ -321,19 +393,33 @@ $('runFun').addEventListener('click',()=>{const a=$('funName1').value.trim(),b=$
 
 
 
-// Firebase Authentication integration. Firebase project configuration for DHEERAJ HUB.
+// Firebase Authentication and owner access.
 const firebaseConfig = {
   apiKey: "AIzaSyCY9J-PVhdCh3AWzuvJzzy_iRVfH5Onp5Q",
   authDomain: "dheeraj-hub.firebaseapp.com",
   projectId: "dheeraj-hub",
   appId: "1:811297970814:web:754b56ffbfa3cec23d62f"
 };
-let auth=null, db=null, authMode='signin';
-const firebaseReady = firebaseConfig.apiKey !== 'AIzaSyCY9J-PVhdCh3AWzuvJzzy_iRVfH5Onp5Q' && firebaseConfig.projectId === 'dheeraj-hub';
-$('heroUidPlayer').addEventListener('click',e=>{e.preventDefault();openTool('uid')});
+let auth=null, db=null, functions=null, authMode='signin';
+const firebaseReady = !!firebaseConfig.apiKey && firebaseConfig.projectId === 'dheeraj-hub';
+const DEVICE_KEY='dheerajhub_installation_id_v1';
+function getDeviceId(){
+ try{
+  let id=localStorage.getItem(DEVICE_KEY);
+  if(!id){id=(crypto.randomUUID?crypto.randomUUID():('dh-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2)));localStorage.setItem(DEVICE_KEY,id);}
+  return id;
+ }catch(e){return 'storage-unavailable';}
+}
+const installationId=getDeviceId();
+$('heroUidPlayer').addEventListener('click',e=>{e.preventDefault();openTool('playeraura')});
 $('loginOpen').addEventListener('click',()=>{$('loginModal').classList.add('show');$('loginMessage').textContent=firebaseReady?'Enter your email and password to continue.':'Firebase setup is required before accounts can be used.'});
 $('loginClose').addEventListener('click',()=>$('loginModal').classList.remove('show'));
 $('loginModal').addEventListener('click',e=>{if(e.target===$('loginModal'))$('loginModal').classList.remove('show')});
+$('adminOpen').addEventListener('click',()=>{$('adminModal').classList.add('show');$('adminMessage').textContent='Sign in with your owner account. The server will check your UID and approved installation.'});
+$('adminClose').addEventListener('click',()=>$('adminModal').classList.remove('show'));
+$('adminModal').addEventListener('click',e=>{if(e.target===$('adminModal'))$('adminModal').classList.remove('show')});
+$('adminDeviceCopy').addEventListener('click',()=>copyText(installationId));
+$('copyAdminDeviceId').addEventListener('click',()=>copyText(installationId));
 function setAuthMode(mode){authMode=mode;$('authSubmit').textContent=mode==='signup'?'Create account':'Sign In';$('authSubtitle').textContent=mode==='signup'?'Create your DHEERAJ HUB member account':'Sign in to your member account';$('loginPassword').autocomplete=mode==='signup'?'new-password':'current-password';$('loginMessage').textContent=mode==='signup'?'Use an email you can access. Password must be at least 6 characters.':'Enter your account details.'}
 $('signupMode').addEventListener('click',()=>setAuthMode('signup'));
 $('googleSignIn').addEventListener('click',async()=>{
@@ -348,35 +434,85 @@ $('forgotPassword').addEventListener('click',async()=>{
  catch(err){$('loginMessage').textContent=err.code==='auth/user-not-found'?'No account found for this email.':'Could not send reset email: '+err.message;}
 });
 $('logoutBtn').addEventListener('click',async()=>{if(auth)try{await auth.signOut()}catch(e){$('loginMessage').textContent=e.message}});
+$('adminLogout').addEventListener('click',async()=>{if(auth)await auth.signOut();$('adminPanel').classList.remove('show');$('adminModal').classList.remove('show');window.scrollTo({top:0,behavior:'smooth'});});
 $('loginForm').addEventListener('submit',async e=>{
- e.preventDefault();if(!firebaseReady||!auth)return $('loginMessage').textContent='Firebase is not configured yet. Follow the setup steps before signing in.';
+ e.preventDefault();if(!firebaseReady||!auth)return $('loginMessage').textContent='Firebase is not configured. Check the Firebase Web app settings.';
  const email=$('loginEmail').value.trim(),password=$('loginPassword').value;
  $('authSubmit').disabled=true;$('authSubmit').textContent='Please wait…';
  try{if(authMode==='signup'){await auth.createUserWithEmailAndPassword(email,password);$('loginMessage').textContent='Account created successfully. You are signed in.';}else{await auth.signInWithEmailAndPassword(email,password);$('loginMessage').textContent='Signed in successfully.';}}
  catch(err){const messages={'auth/email-already-in-use':'This email already has an account. Sign in instead.','auth/invalid-email':'Enter a valid email address.','auth/weak-password':'Use a password with at least 6 characters.','auth/user-not-found':'No account found for this email. Create an account first.','auth/wrong-password':'Incorrect email or password.','auth/invalid-credential':'Incorrect email or password.','auth/too-many-requests':'Too many attempts. Try again later.'};$('loginMessage').textContent=messages[err.code]||err.message;}
  finally{$('authSubmit').disabled=false;$('authSubmit').textContent=authMode==='signup'?'Create account':'Sign In'}
 });
-// Load Firebase SDK only after the user supplies their own Firebase project config.
-if(firebaseReady){
- const a=document.createElement('script');a.src='https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js';a.onload=()=>{const b=document.createElement('script');b.src='https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js';b.onload=()=>{const c=document.createElement('script');c.src='https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js';c.onload=()=>{firebase.initializeApp(firebaseConfig);auth=firebase.auth();db=firebase.firestore();auth.getRedirectResult().catch(err=>{$('loginMessage').textContent='Google sign-in error: '+err.message;});
-auth.onAuthStateChanged(user=>{authInitialized=true;$('logoutBtn').style.display=user?'inline-block':'none';$('loginMessage').textContent=user?'Signed in as '+(user.email||'Google account'):'You are signed out.';$('loginOpen').textContent=user?'Account':'Login / Sign up';if(user){$('loginModal').classList.remove('show');if(pendingToolId){const next=pendingToolId;pendingToolId=null;openTool(next);}}});};document.head.appendChild(c)};document.head.appendChild(b)};document.head.appendChild(a);
+$('adminLoginForm').addEventListener('submit',async e=>{
+ e.preventDefault();
+ if(!firebaseReady||!auth||!functions)return $('adminMessage').textContent='Firebase setup is not ready. Try again after SDK loads.';
+ const email=$('adminEmail').value.trim(),password=$('adminPassword').value;
+ $('adminSubmit').disabled=true;$('adminSubmit').textContent='Checking…';
+ try{
+  await auth.signInWithEmailAndPassword(email,password);
+  const verify=functions.httpsCallable('verifyAdminDevice');
+  const result=await verify({deviceId:installationId});
+  if(!result.data||result.data.allowed!==true)throw new Error('This account or device is not approved for Admin access.');
+  $('adminAccount').textContent=auth.currentUser.email||'Owner account';
+  $('adminUid').textContent=auth.currentUser.uid;
+  $('adminDeviceId').textContent=installationId;
+  $('adminDeviceStatus').textContent='Server verified';
+  $('adminModal').classList.remove('show');
+  $('adminPanel').classList.add('show');
+  $('adminPanel').scrollIntoView({behavior:'smooth'});
+ }catch(err){
+  $('adminMessage').textContent=err.message||'Admin verification failed.';
+ }finally{$('adminSubmit').disabled=false;$('adminSubmit').textContent='Verify Admin';$('adminPassword').value='';}
+});
+function loadFirebase(){
+ const appScript=document.createElement('script');
+ appScript.src='https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js';
+ appScript.onerror=()=>{$('loginMessage').textContent='Could not load Firebase App SDK. Check internet connection or script access.';};
+ appScript.onload=()=>{
+  const authScript=document.createElement('script');
+  authScript.src='https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js';
+  authScript.onerror=()=>{$('loginMessage').textContent='Firebase Auth SDK failed to load. Check internet connection or script access.';};
+  authScript.onload=()=>{
+   try{
+    if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);
+    auth=firebase.auth();
+    auth.getRedirectResult().catch(err=>{$('loginMessage').textContent='Google sign-in error: '+(err.message||err.code);});
+    auth.onAuthStateChanged(user=>{
+     authInitialized=true;
+     $('logoutBtn').style.display=user?'inline-block':'none';
+     $('loginMessage').textContent=user?'Signed in as '+(user.email||'Google account'):'You are signed out.';
+     $('loginOpen').textContent=user?'Account':'Login / Sign up';
+     if(!user)$('adminPanel').classList.remove('show');
+     if(user){
+      $('loginModal').classList.remove('show');
+      if(pendingToolId){const next=pendingToolId;pendingToolId=null;openTool(next);}
+     }
+    });
+    // Admin-only Firebase Functions SDK loads separately. Member sign-in does not wait for it.
+    const functionsScript=document.createElement('script');
+    functionsScript.src='https://www.gstatic.com/firebasejs/10.12.2/firebase-functions-compat.js';
+    functionsScript.onerror=()=>{
+     functions=null;
+     $('adminMessage').textContent='Admin backend SDK failed to load. Member login can still work.';
+    };
+    functionsScript.onload=()=>{
+     try{functions=firebase.app().functions('asia-south1');}
+     catch(err){functions=null;$('adminMessage').textContent='Admin backend initialization error: '+err.message;}
+    };
+    document.head.appendChild(functionsScript);
+   }catch(err){
+    auth=null;
+    $('loginMessage').textContent='Firebase initialization error: '+(err.message||err);
+   }
+  };
+  document.head.appendChild(authScript);
+ };
+ document.head.appendChild(appScript);
 }
-
-if(!firebaseReady){$('loginMessage').textContent='Firebase Web API key still needs to be added locally in this file. The public landing page remains available.';}
+if(firebaseReady)loadFirebase();
 
 // Live UID profile data is not fabricated. The hero UID button now opens the working UID-based Player Aura tool.
-$('uidDemoSearch').addEventListener('click',()=>{
- const uid=$('uidInput').value.trim(), region=$('uidRegion').value;
- if(!/^[0-9]{6,15}$/.test(uid)){toast('Enter a valid numeric Free Fire UID (6–15 digits).');return;}
- $('uidResult').innerHTML=`<div class="result"><b>PLAYER PROFILE</b><br><small>UID: ${safe(uid)}</small></div>
- <div class="resultrow"><span><b>Player Name</b><br>Not available</span><span>—</span></div>
- <div class="resultrow"><span><b>Level</b><br>Not available</span><span>—</span></div>
- <div class="resultrow"><span><b>Region</b><br>Selected server</span><span>${safe(region)}</span></div>
- <div class="resultrow"><span><b>Likes</b><br>Not available</span><span>—</span></div>
- <div class="resultrow"><span><b>Rank</b><br>Not available</span><span>—</span></div>
- <div class="notice">UID received. Live profile details cannot be fetched until a verified Free Fire data API/backend is connected.</div>`;
- toast('UID Info panel updated. Live data source is not connected.');
-});
+$('uidDemoSearch').addEventListener('click',()=>{toast('Live UID profile lookup needs a verified Free Fire data API. Use Player Aura for UID-based entertainment.');openTool('playeraura')});
 
 // Fill generators with editable examples so each tool has something visible immediately.
 $('nameInput').value='Dheeraj';
