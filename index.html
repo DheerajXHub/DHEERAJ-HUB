@@ -96,13 +96,20 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
   .loginbox .core{display:none}
 }
 
+
+#memberAvatar{font-size:17px;box-shadow:0 0 0 2px rgba(139,92,246,.55)}
+#adminBrandLogo{font-size:19px;box-shadow:0 0 0 2px rgba(6,182,212,.35),0 0 18px rgba(139,92,246,.28)}
+.dataTable th,.dataTable td{padding:10px 9px;border-bottom:1px solid rgba(150,150,190,.18);text-align:left;font-size:12px;vertical-align:top}
+.dataTable th{color:#aeb6d4;font-weight:700;white-space:nowrap}
+.dataTable td{color:#e6e8f5;overflow-wrap:anywhere}
+
 </style>
 </head>
 <body>
 <header><div class="wrap nav">
 <a class="brand" href="#home"><span class="logo">D</span><span>DHEERAJ <em>HUB</em></span></a>
 <nav class="links"><a href="#tools">TOOLS</a><a href="#uid">UID PLAYER</a><a href="#about">ABOUT</a></nav>
-<div class="navright"><button class="btn small" id="adminOpen">Admin</button><button class="btn small" id="loginOpen">Login / Sign up</button><button class="iconbtn menu" id="menuBtn">☰</button></div>
+<div class="navright"><button class="btn small" id="adminOpen">Admin</button><button class="btn small" id="loginOpen">Login / Sign up</button><button class="iconbtn" id="memberAvatar" type="button" title="Member account" style="display:none;border-radius:50%;width:40px;height:40px;padding:0;font-weight:800"></button><button class="iconbtn" id="adminBrandLogo" type="button" title="DHEERAJ HUB Admin" style="display:none;border-radius:12px;width:42px;height:42px;padding:0;font-weight:900;color:#fff;background:linear-gradient(135deg,#8b5cf6,#06b6d4)">D</button><button class="iconbtn menu" id="menuBtn">☰</button></div>
 </div><nav class="wrap mobile" id="mobileNav" style="display:none"><a href="#tools">Tools</a><a href="#uid">UID Player</a><a href="#about">About</a></nav></header>
 <main id="home">
 <section class="wrap hero"><div><span class="pill"><i class="dot"></i> FREE FIRE COMMUNITY TOOLKIT</span><h1>PLAY SMART.<br><span class="grad">RISE HIGH.</span></h1><p class="lead">Your gaming space for stylish names, bio designs, symbols, sensitivity planning and fun mini tools — all in one place.</p><div class="actions"><a class="btn primary" href="#tools">Explore tools →</a><a class="btn" href="#tools" id="heroUidPlayer">UID Player</a></div><div class="stats"><div class="stat"><b>12+</b><small>LOCAL TOOLS</small></div><div class="stat"><b>0</b><small>API KEYS NEEDED</small></div><div class="stat"><b>2</b><small>LANGUAGES</small></div></div></div><div class="art"><div class="core">⚡</div><div class="artfoot"><span>DHEERAJ HUB</span><span>PLAYER TOOLKIT</span></div></div></section>
@@ -211,7 +218,10 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
    <div class="adminTile"><b>Approved installation</b><div id="adminDeviceStatus">Verified</div></div>
    <div class="adminTile"><b>Installation ID</b><div id="adminDeviceId">—</div><button class="btn small" id="copyAdminDeviceId" style="margin-top:8px">Copy ID</button></div>
   </div>
-  <div class="notice" style="margin-top:14px">Admin panel foundation is active. Member passwords are never displayed or stored by this page. Add future admin actions through authenticated Cloud Functions; never put secret keys or passwords in this HTML.</div>
+  <div class="backrow" style="margin-top:18px;gap:10px;flex-wrap:wrap"><h3 style="margin:0">Visitor Accounts</h3><button class="btn small" id="refreshVisitors" type="button">Refresh visitors</button></div>
+  <p class="muted" id="visitorStatus">Visitor account details load only after server-side Admin verification.</p>
+  <div style="overflow-x:auto"><table class="dataTable" style="width:100%;border-collapse:collapse;min-width:620px"><thead><tr><th>Email</th><th>Display name</th><th>UID</th><th>Created</th><th>Last sign-in</th><th>Provider</th></tr></thead><tbody id="visitorRows"><tr><td colspan="6">No visitor data loaded.</td></tr></tbody></table></div>
+  <div class="notice" style="margin-top:14px">Only account profile metadata is shown (email, display name when available, UID, creation time, last sign-in and sign-in provider). Passwords, OTPs and private credentials are never accessible or displayed.</div>
  </div>
 </section>
 
@@ -413,6 +423,35 @@ function getDeviceId(){
 const installationId=getDeviceId();
 $('heroUidPlayer').addEventListener('click',e=>{e.preventDefault();openTool('playeraura')});
 $('loginOpen').addEventListener('click',()=>{$('loginModal').classList.add('show');$('loginMessage').textContent=firebaseReady?'Enter your email and password to continue.':'Firebase setup is required before accounts can be used.'});
+
+function makeMemberAvatar(user){
+ const palette=['#7c3aed','#0891b2','#db2777','#16a34a','#d97706','#2563eb'];
+ const icons=['✦','⚡','◆','✧','●','★','♛','☄'];
+ let seed=(user&&user.uid?user.uid:'member').split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+ const el=$('memberAvatar');
+ el.textContent=icons[seed%icons.length];
+ el.style.background=palette[seed%palette.length];
+ el.style.color='#fff';
+ el.title=(user&&user.email?user.email:'Member')+' · Account';
+}
+function setHeaderIdentity(user){
+ const signed=!!user;
+ $('loginOpen').style.display=signed?'none':'inline-flex';
+ $('memberAvatar').style.display=signed?'inline-flex':'none';
+ if(!signed){$('adminBrandLogo').style.display='none';}
+ if(signed)makeMemberAvatar(user);
+}
+$('memberAvatar').addEventListener('click',()=>{
+ if(!auth||!auth.currentUser)return;
+ $('loginModal').classList.add('show');
+ $('authSubtitle').textContent='Signed in as '+(auth.currentUser.email||'Member');
+ $('loginMessage').textContent='Your member account is active.';
+});
+$('adminBrandLogo').addEventListener('click',()=>{
+ if($('adminPanel').classList.contains('show'))$('adminPanel').scrollIntoView({behavior:'smooth'});
+ else $('adminPanel').classList.add('show');
+});
+
 $('loginClose').addEventListener('click',()=>$('loginModal').classList.remove('show'));
 $('loginModal').addEventListener('click',e=>{if(e.target===$('loginModal'))$('loginModal').classList.remove('show')});
 $('adminOpen').addEventListener('click',()=>{$('adminModal').classList.add('show');$('adminMessage').textContent='Sign in with your owner account. The server will check your UID and approved installation.'});
@@ -420,6 +459,33 @@ $('adminClose').addEventListener('click',()=>$('adminModal').classList.remove('s
 $('adminModal').addEventListener('click',e=>{if(e.target===$('adminModal'))$('adminModal').classList.remove('show')});
 $('adminDeviceCopy').addEventListener('click',()=>copyText(installationId));
 $('copyAdminDeviceId').addEventListener('click',()=>copyText(installationId));
+
+let adminVerified=false;
+async function loadVisitorAccounts(){
+ if(!adminVerified||!functions){$('visitorStatus').textContent='Admin verification is required.';return;}
+ $('visitorStatus').textContent='Loading visitor accounts…';
+ $('visitorRows').innerHTML='<tr><td colspan="6">Loading…</td></tr>';
+ try{
+  const call=functions.httpsCallable('listMemberAccounts');
+  const response=await call({});
+  const users=(response.data&&response.data.users)||[];
+  $('visitorRows').innerHTML='';
+  if(!users.length){$('visitorRows').innerHTML='<tr><td colspan="6">No registered accounts found.</td></tr>';}
+  users.forEach(u=>{
+   const tr=document.createElement('tr');
+   [u.email||'—',u.displayName||'—',u.uid||'—',u.createdAt||'—',u.lastSignInAt||'Never',Array.isArray(u.providers)?u.providers.join(', '):'—'].forEach(value=>{
+    const td=document.createElement('td');td.textContent=value;tr.appendChild(td);
+   });
+   $('visitorRows').appendChild(tr);
+  });
+  $('visitorStatus').textContent='Showing '+users.length+' account(s). Only account metadata is available; passwords are never exposed.';
+ }catch(err){
+  $('visitorStatus').textContent='Could not load visitor accounts: '+(err.message||err);
+  $('visitorRows').innerHTML='<tr><td colspan="6">Server request failed.</td></tr>';
+ }
+}
+$('refreshVisitors').addEventListener('click',loadVisitorAccounts);
+
 function setAuthMode(mode){authMode=mode;$('authSubmit').textContent=mode==='signup'?'Create account':'Sign In';$('authSubtitle').textContent=mode==='signup'?'Create your DHEERAJ HUB member account':'Sign in to your member account';$('loginPassword').autocomplete=mode==='signup'?'new-password':'current-password';$('loginMessage').textContent=mode==='signup'?'Use an email you can access. Password must be at least 6 characters.':'Enter your account details.'}
 $('signupMode').addEventListener('click',()=>setAuthMode('signup'));
 $('googleSignIn').addEventListener('click',async()=>{
@@ -434,7 +500,7 @@ $('forgotPassword').addEventListener('click',async()=>{
  catch(err){$('loginMessage').textContent=err.code==='auth/user-not-found'?'No account found for this email.':'Could not send reset email: '+err.message;}
 });
 $('logoutBtn').addEventListener('click',async()=>{if(auth)try{await auth.signOut()}catch(e){$('loginMessage').textContent=e.message}});
-$('adminLogout').addEventListener('click',async()=>{if(auth)await auth.signOut();$('adminPanel').classList.remove('show');$('adminModal').classList.remove('show');window.scrollTo({top:0,behavior:'smooth'});});
+$('adminLogout').addEventListener('click',async()=>{adminVerified=false;if(auth)await auth.signOut();$('adminPanel').classList.remove('show');$('adminModal').classList.remove('show');$('adminBrandLogo').style.display='none';$('adminOpen').style.display='inline-flex';window.scrollTo({top:0,behavior:'smooth'});});
 $('loginForm').addEventListener('submit',async e=>{
  e.preventDefault();if(!firebaseReady||!auth)return $('loginMessage').textContent='Firebase is not configured. Check the Firebase Web app settings.';
  const email=$('loginEmail').value.trim(),password=$('loginPassword').value;
@@ -457,11 +523,17 @@ $('adminLoginForm').addEventListener('submit',async e=>{
   $('adminUid').textContent=auth.currentUser.uid;
   $('adminDeviceId').textContent=installationId;
   $('adminDeviceStatus').textContent='Server verified';
+  adminVerified=true;
+  $('adminBrandLogo').style.display='inline-flex';
+  $('adminOpen').style.display='none';
+  $('memberAvatar').style.display='none';
   $('adminModal').classList.remove('show');
   $('adminPanel').classList.add('show');
   $('adminPanel').scrollIntoView({behavior:'smooth'});
+  await loadVisitorAccounts();
  }catch(err){
   $('adminMessage').textContent=err.message||'Admin verification failed.';
+  if(auth&&auth.currentUser)try{await auth.signOut();}catch(signOutError){}
  }finally{$('adminSubmit').disabled=false;$('adminSubmit').textContent='Verify Admin';$('adminPassword').value='';}
 });
 function loadFirebase(){
@@ -481,8 +553,8 @@ function loadFirebase(){
      authInitialized=true;
      $('logoutBtn').style.display=user?'inline-block':'none';
      $('loginMessage').textContent=user?'Signed in as '+(user.email||'Google account'):'You are signed out.';
-     $('loginOpen').textContent=user?'Account':'Login / Sign up';
-     if(!user)$('adminPanel').classList.remove('show');
+     setHeaderIdentity(user);
+     if(!user){$('adminPanel').classList.remove('show');adminVerified=false;$('adminBrandLogo').style.display='none';$('adminOpen').style.display='inline-flex';}
      if(user){
       $('loginModal').classList.remove('show');
       if(pendingToolId){const next=pendingToolId;pendingToolId=null;openTool(next);}
