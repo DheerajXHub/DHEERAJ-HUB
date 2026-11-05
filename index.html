@@ -103,14 +103,16 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
 .dataTable th{color:#aeb6d4;font-weight:700;white-space:nowrap}
 .dataTable td{color:#e6e8f5;overflow-wrap:anywhere}
 
+#mobileNav #adminMenuOpen{display:block;color:#e9e8ff;border:1px solid #6655a5;background:linear-gradient(120deg,#2a2147,#151b2b);padding:12px 14px;border-radius:12px}
+#mobileNav a{cursor:pointer}
 </style>
 </head>
 <body>
 <header><div class="wrap nav">
 <a class="brand" href="#home"><span class="logo">D</span><span>DHEERAJ <em>HUB</em></span></a>
 <nav class="links"><a href="#tools">TOOLS</a><a href="#uid">UID PLAYER</a><a href="#about">ABOUT</a></nav>
-<div class="navright"><button class="btn small" id="adminOpen">Admin</button><button class="btn small" id="loginOpen">Login / Sign up</button><button class="iconbtn" id="memberAvatar" type="button" title="Member account" style="display:none;border-radius:50%;width:40px;height:40px;padding:0;font-weight:800"></button><button class="iconbtn" id="adminBrandLogo" type="button" title="DHEERAJ HUB Admin" style="display:none;border-radius:12px;width:42px;height:42px;padding:0;font-weight:900;color:#fff;background:linear-gradient(135deg,#8b5cf6,#06b6d4)">D</button><button class="iconbtn menu" id="menuBtn">☰</button></div>
-</div><nav class="wrap mobile" id="mobileNav" style="display:none"><a href="#tools">Tools</a><a href="#uid">UID Player</a><a href="#about">About</a></nav></header>
+<div class="navright"><button class="btn small" id="loginOpen">Login / Sign up</button><button class="iconbtn" id="memberAvatar" type="button" title="Member account" style="display:none;border-radius:50%;width:40px;height:40px;padding:0;font-weight:800"></button><button class="iconbtn" id="adminBrandLogo" type="button" title="DHEERAJ HUB Admin" style="display:none;border-radius:12px;width:42px;height:42px;padding:0;font-weight:900;color:#fff;background:linear-gradient(135deg,#8b5cf6,#06b6d4)">D</button><button class="iconbtn menu" id="menuBtn" aria-label="Open menu">⋮</button></div>
+</div><nav class="wrap mobile" id="mobileNav" style="display:none"><a href="#tools">Tools</a><a href="#uid">UID Player</a><a href="#about">About</a><button class="btn small" id="adminMenuOpen" type="button" style="width:100%;text-align:left;margin-top:8px">Admin Panel</button></nav></header>
 <main id="home">
 <section class="wrap hero"><div><span class="pill"><i class="dot"></i> FREE FIRE COMMUNITY TOOLKIT</span><h1>PLAY SMART.<br><span class="grad">RISE HIGH.</span></h1><p class="lead">Your gaming space for stylish names, bio designs, symbols, sensitivity planning and fun mini tools — all in one place.</p><div class="actions"><a class="btn primary" href="#tools">Explore tools →</a><a class="btn" href="#tools" id="heroUidPlayer">UID Player</a></div><div class="stats"><div class="stat"><b>12+</b><small>LOCAL TOOLS</small></div><div class="stat"><b>0</b><small>API KEYS NEEDED</small></div><div class="stat"><b>2</b><small>LANGUAGES</small></div></div></div><div class="art"><div class="core">⚡</div><div class="artfoot"><span>DHEERAJ HUB</span><span>PLAYER TOOLKIT</span></div></div></section>
 <section class="wrap section" id="tools"><div class="eyebrow">PICK A TOOL</div><h2 class="heading">Gaming tools</h2><p class="muted">Choose a tool. All local tools work in your browser without a login or API key.</p>
@@ -218,8 +220,16 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
    <div class="adminTile"><b>Approved installation</b><div id="adminDeviceStatus">Verified</div></div>
    <div class="adminTile"><b>Installation ID</b><div id="adminDeviceId">—</div><button class="btn small" id="copyAdminDeviceId" style="margin-top:8px">Copy ID</button></div>
   </div>
+  <h3 style="margin-top:18px">Local Admin Tools (No Cloud Functions)</h3>
+  <div class="adminGrid">
+   <div class="adminTile"><b>Current Admin Session</b><p class="muted" id="localAdminEmail">Not signed in</p><small>Shows only the account currently signed into the separate Admin session.</small></div>
+   <div class="adminTile"><b>Current Browser Installation</b><p class="muted" id="localAdminDevice">Not available</p><button class="btn small" id="copyLocalDevice" type="button">Copy Installation ID</button></div>
+   <div class="adminTile"><b>Website Tools</b><p class="muted">Existing browser-based tools remain available and unchanged.</p></div>
+   <div class="adminTile"><b>Local Session Status</b><p class="muted" id="localAdminStatus">Waiting for Admin sign-in.</p></div>
+  </div>
+  <div class="notice" style="margin:12px 0">No-Cloud-Functions mode can show this browser's local information only. It cannot securely list all Firebase visitors, verify the physical phone model, approve devices on the server, or manage other users. Those actions require a trusted backend.</div>
   <div class="backrow" style="margin-top:18px;gap:10px;flex-wrap:wrap"><h3 style="margin:0">Visitor Accounts</h3><button class="btn small" id="refreshVisitors" type="button">Refresh visitors</button></div>
-  <p class="muted" id="visitorStatus">Visitor account details load only after server-side Admin verification.</p>
+  <p class="muted" id="visitorStatus">Visitor account details require a deployed secure backend. They are unavailable in no-Cloud-Functions mode.</p>
   <div style="overflow-x:auto"><table class="dataTable" style="width:100%;border-collapse:collapse;min-width:620px"><thead><tr><th>Email</th><th>Display name</th><th>UID</th><th>Created</th><th>Last sign-in</th><th>Provider</th></tr></thead><tbody id="visitorRows"><tr><td colspan="6">No visitor data loaded.</td></tr></tbody></table></div>
   <div class="notice" style="margin-top:14px">Only account profile metadata is shown (email, display name when available, UID, creation time, last sign-in and sign-in provider). Passwords, OTPs and private credentials are never accessible or displayed.</div>
  </div>
@@ -410,7 +420,7 @@ const firebaseConfig = {
   projectId: "dheeraj-hub",
   appId: "1:811297970814:web:754b56ffbfa3cec23d62f"
 };
-let auth=null, db=null, functions=null, authMode='signin';
+let auth=null, db=null, functions=null, adminApp=null, adminAuth=null, adminFunctions=null, authMode='signin';
 const firebaseReady = !!firebaseConfig.apiKey && firebaseConfig.projectId === 'dheeraj-hub';
 const DEVICE_KEY='dheerajhub_installation_id_v1';
 function getDeviceId(){
@@ -422,7 +432,15 @@ function getDeviceId(){
 }
 const installationId=getDeviceId();
 $('heroUidPlayer').addEventListener('click',e=>{e.preventDefault();openTool('playeraura')});
-$('loginOpen').addEventListener('click',()=>{$('loginModal').classList.add('show');$('loginMessage').textContent=firebaseReady?'Enter your email and password to continue.':'Firebase setup is required before accounts can be used.'});
+$('loginOpen').addEventListener('click',()=>{
+ $('loginTitle').textContent='Welcome to DHEERAJ HUB';
+ $('loginForm').style.display='block';$('googleSignIn').style.display='block';
+ $('signupMode').style.display='inline-flex';$('forgotPassword').style.display='inline-flex';
+ $('logoutBtn').style.display='none';
+ $('authSubtitle').textContent='Sign in to your member account';
+ $('loginModal').classList.add('show');
+ $('loginMessage').textContent=firebaseReady?'Enter your email and password to continue.':'Firebase setup is required before accounts can be used.';
+});
 
 function makeMemberAvatar(user){
  const palette=['#7c3aed','#0891b2','#db2777','#16a34a','#d97706','#2563eb'];
@@ -443,31 +461,39 @@ function setHeaderIdentity(user){
 }
 $('memberAvatar').addEventListener('click',()=>{
  if(!auth||!auth.currentUser)return;
- $('loginModal').classList.add('show');
+ $('loginTitle').textContent='Member Account';
  $('authSubtitle').textContent='Signed in as '+(auth.currentUser.email||'Member');
+ $('loginForm').style.display='none';
+ $('googleSignIn').style.display='none';
+ $('signupMode').style.display='none';
+ $('forgotPassword').style.display='none';
+ $('logoutBtn').style.display='inline-flex';
  $('loginMessage').textContent='Your member account is active.';
+ $('loginModal').classList.add('show');
 });
 $('adminBrandLogo').addEventListener('click',()=>{
+ if(!adminVerified)return;
  if($('adminPanel').classList.contains('show'))$('adminPanel').scrollIntoView({behavior:'smooth'});
- else $('adminPanel').classList.add('show');
 });
 
 $('loginClose').addEventListener('click',()=>$('loginModal').classList.remove('show'));
 $('loginModal').addEventListener('click',e=>{if(e.target===$('loginModal'))$('loginModal').classList.remove('show')});
-$('adminOpen').addEventListener('click',()=>{$('adminModal').classList.add('show');$('adminMessage').textContent='Sign in with your owner account. The server will check your UID and approved installation.'});
+function openAdminLogin(){ $('adminModal').classList.add('show'); $('adminMessage').textContent='Sign in with your owner account. Admin verification requires the secure backend.'; $('mobileNav').style.display='none'; }
+$('adminMenuOpen').addEventListener('click',openAdminLogin);
 $('adminClose').addEventListener('click',()=>$('adminModal').classList.remove('show'));
 $('adminModal').addEventListener('click',e=>{if(e.target===$('adminModal'))$('adminModal').classList.remove('show')});
 $('adminDeviceCopy').addEventListener('click',()=>copyText(installationId));
 $('copyAdminDeviceId').addEventListener('click',()=>copyText(installationId));
 
 let adminVerified=false;
-async function loadVisitorAccounts(){
- if(!adminVerified||!functions){$('visitorStatus').textContent='Admin verification is required.';return;}
+async $('copyLocalDevice').addEventListener('click',()=>copyText(installationId));
+function loadVisitorAccounts(){
+ if(!adminVerified||!adminFunctions){$('visitorStatus').textContent='Admin verification is required or the Admin Functions SDK is unavailable.';return;}
  $('visitorStatus').textContent='Loading visitor accounts…';
  $('visitorRows').innerHTML='<tr><td colspan="6">Loading…</td></tr>';
  try{
-  const call=functions.httpsCallable('listMemberAccounts');
-  const response=await call({});
+  const call=adminFunctions.httpsCallable('listMemberAccounts');
+  const response=await call({deviceId:installationId});
   const users=(response.data&&response.data.users)||[];
   $('visitorRows').innerHTML='';
   if(!users.length){$('visitorRows').innerHTML='<tr><td colspan="6">No registered accounts found.</td></tr>';}
@@ -499,30 +525,49 @@ $('forgotPassword').addEventListener('click',async()=>{
  try{await auth.sendPasswordResetEmail(email);$('loginMessage').textContent='Password reset email sent. Check your inbox.';}
  catch(err){$('loginMessage').textContent=err.code==='auth/user-not-found'?'No account found for this email.':'Could not send reset email: '+err.message;}
 });
-$('logoutBtn').addEventListener('click',async()=>{if(auth)try{await auth.signOut()}catch(e){$('loginMessage').textContent=e.message}});
-$('adminLogout').addEventListener('click',async()=>{adminVerified=false;if(auth)await auth.signOut();$('adminPanel').classList.remove('show');$('adminModal').classList.remove('show');$('adminBrandLogo').style.display='none';$('adminOpen').style.display='inline-flex';window.scrollTo({top:0,behavior:'smooth'});});
+$('logoutBtn').addEventListener('click',async()=>{
+ if(auth)try{await auth.signOut();}catch(e){$('loginMessage').textContent=e.message;}
+ $('loginModal').classList.remove('show');
+ $('loginForm').style.display='block';$('googleSignIn').style.display='block';
+ $('signupMode').style.display='inline-flex';$('forgotPassword').style.display='inline-flex';
+ $('loginTitle').textContent='Welcome to DHEERAJ HUB';
+});
+$('adminLogout').addEventListener('click',async()=>{adminVerified=false;if(adminAuth)await adminAuth.signOut();$('adminPanel').classList.remove('show');$('adminModal').classList.remove('show');$('adminBrandLogo').style.display='none';$('adminOpen').style.display='inline-flex';setHeaderIdentity(auth&&auth.currentUser);window.scrollTo({top:0,behavior:'smooth'});});
 $('loginForm').addEventListener('submit',async e=>{
  e.preventDefault();if(!firebaseReady||!auth)return $('loginMessage').textContent='Firebase is not configured. Check the Firebase Web app settings.';
  const email=$('loginEmail').value.trim(),password=$('loginPassword').value;
  $('authSubmit').disabled=true;$('authSubmit').textContent='Please wait…';
- try{if(authMode==='signup'){await auth.createUserWithEmailAndPassword(email,password);$('loginMessage').textContent='Account created successfully. You are signed in.';}else{await auth.signInWithEmailAndPassword(email,password);$('loginMessage').textContent='Signed in successfully.';}}
+ try{
+  await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+  if(authMode==='signup')await auth.createUserWithEmailAndPassword(email,password);
+  else await auth.signInWithEmailAndPassword(email,password);
+  $('loginModal').classList.remove('show');
+  $('loginForm').style.display='block';$('googleSignIn').style.display='block';
+  $('signupMode').style.display='inline-flex';$('forgotPassword').style.display='inline-flex';
+  $('loginTitle').textContent='Welcome to DHEERAJ HUB';
+  $('loginMessage').textContent=authMode==='signup'?'Account created successfully.':'Signed in successfully.';
+ }
  catch(err){const messages={'auth/email-already-in-use':'This email already has an account. Sign in instead.','auth/invalid-email':'Enter a valid email address.','auth/weak-password':'Use a password with at least 6 characters.','auth/user-not-found':'No account found for this email. Create an account first.','auth/wrong-password':'Incorrect email or password.','auth/invalid-credential':'Incorrect email or password.','auth/too-many-requests':'Too many attempts. Try again later.'};$('loginMessage').textContent=messages[err.code]||err.message;}
  finally{$('authSubmit').disabled=false;$('authSubmit').textContent=authMode==='signup'?'Create account':'Sign In'}
 });
 $('adminLoginForm').addEventListener('submit',async e=>{
  e.preventDefault();
- if(!firebaseReady||!auth||!functions)return $('adminMessage').textContent='Firebase setup is not ready. Try again after SDK loads.';
+ if(!firebaseReady||!adminAuth||!adminFunctions)return $('adminMessage').textContent='Admin Firebase session or Cloud Functions SDK is not ready. Refresh and try again.';
  const email=$('adminEmail').value.trim(),password=$('adminPassword').value;
  $('adminSubmit').disabled=true;$('adminSubmit').textContent='Checking…';
  try{
-  await auth.signInWithEmailAndPassword(email,password);
-  const verify=functions.httpsCallable('verifyAdminDevice');
+  await adminAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+  await adminAuth.signInWithEmailAndPassword(email,password);
+  const verify=adminFunctions.httpsCallable('verifyAdminDevice');
   const result=await verify({deviceId:installationId});
   if(!result.data||result.data.allowed!==true)throw new Error('This account or device is not approved for Admin access.');
-  $('adminAccount').textContent=auth.currentUser.email||'Owner account';
-  $('adminUid').textContent=auth.currentUser.uid;
+  $('adminAccount').textContent=adminAuth.currentUser.email||'Owner account';
+  $('adminUid').textContent=adminAuth.currentUser.uid;
   $('adminDeviceId').textContent=installationId;
   $('adminDeviceStatus').textContent='Server verified';
+  $('localAdminEmail').textContent=adminAuth.currentUser.email||'Owner account';
+  $('localAdminDevice').textContent=installationId;
+  $('localAdminStatus').textContent='Admin session verified on this browser.';
   adminVerified=true;
   $('adminBrandLogo').style.display='inline-flex';
   $('adminOpen').style.display='none';
@@ -533,7 +578,7 @@ $('adminLoginForm').addEventListener('submit',async e=>{
   await loadVisitorAccounts();
  }catch(err){
   $('adminMessage').textContent=err.message||'Admin verification failed.';
-  if(auth&&auth.currentUser)try{await auth.signOut();}catch(signOutError){}
+  if(adminAuth&&adminAuth.currentUser)try{await adminAuth.signOut();}catch(signOutError){}
  }finally{$('adminSubmit').disabled=false;$('adminSubmit').textContent='Verify Admin';$('adminPassword').value='';}
 });
 function loadFirebase(){
@@ -546,34 +591,47 @@ function loadFirebase(){
   authScript.onerror=()=>{$('loginMessage').textContent='Firebase Auth SDK failed to load. Check internet connection or script access.';};
   authScript.onload=()=>{
    try{
-    if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);
+    if(!firebase.apps.some(app=>app.name==='[DEFAULT]'))firebase.initializeApp(firebaseConfig);
     auth=firebase.auth();
+    auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(err=>{$('loginMessage').textContent='Could not save member login session: '+err.message;});
     auth.getRedirectResult().catch(err=>{$('loginMessage').textContent='Google sign-in error: '+(err.message||err.code);});
     auth.onAuthStateChanged(user=>{
      authInitialized=true;
-     $('logoutBtn').style.display=user?'inline-block':'none';
-     $('loginMessage').textContent=user?'Signed in as '+(user.email||'Google account'):'You are signed out.';
-     setHeaderIdentity(user);
-     if(!user){$('adminPanel').classList.remove('show');adminVerified=false;$('adminBrandLogo').style.display='none';$('adminOpen').style.display='inline-flex';}
      if(user){
       $('loginModal').classList.remove('show');
+      $('loginForm').style.display='block';$('googleSignIn').style.display='block';
+      $('signupMode').style.display='inline-flex';$('forgotPassword').style.display='inline-flex';
+      $('loginTitle').textContent='Welcome to DHEERAJ HUB';
+      $('loginMessage').textContent='Signed in as '+(user.email||'Google account');
+      $('logoutBtn').style.display='none';
       if(pendingToolId){const next=pendingToolId;pendingToolId=null;openTool(next);}
      }
+     setHeaderIdentity(user);
     });
-    // Admin-only Firebase Functions SDK loads separately. Member sign-in does not wait for it.
+
+    // A separate named Firebase app keeps Admin credentials/session isolated from Member login.
+    if(!firebase.apps.some(app=>app.name==='dheeraj-admin'))adminApp=firebase.initializeApp(firebaseConfig,'dheeraj-admin');
+    else adminApp=firebase.app('dheeraj-admin');
+    adminAuth=adminApp.auth();
+
     const functionsScript=document.createElement('script');
     functionsScript.src='https://www.gstatic.com/firebasejs/10.12.2/firebase-functions-compat.js';
     functionsScript.onerror=()=>{
-     functions=null;
-     $('adminMessage').textContent='Admin backend SDK failed to load. Member login can still work.';
+     functions=null;adminFunctions=null;
+     $('adminMessage').textContent='Firebase Functions SDK failed to load. Member login can still work.';
     };
     functionsScript.onload=()=>{
-     try{functions=firebase.app().functions('asia-south1');}
-     catch(err){functions=null;$('adminMessage').textContent='Admin backend initialization error: '+err.message;}
+     try{
+      functions=firebase.app().functions('asia-south1');
+      adminFunctions=adminApp.functions('asia-south1');
+     }catch(err){
+      functions=null;adminFunctions=null;
+      $('adminMessage').textContent='Admin backend initialization error: '+err.message;
+     }
     };
     document.head.appendChild(functionsScript);
    }catch(err){
-    auth=null;
+    auth=null;adminAuth=null;
     $('loginMessage').textContent='Firebase initialization error: '+(err.message||err);
    }
   };
