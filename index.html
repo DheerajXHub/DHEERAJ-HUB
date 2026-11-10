@@ -105,17 +105,24 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
 #mobileNav #adminMenuOpen{display:block;color:#e9e8ff;border:1px solid #6655a5;background:linear-gradient(120deg,#2a2147,#151b2b);padding:12px 14px;border-radius:12px}
 #mobileNav a{cursor:pointer}
 .hamburger-lines{display:flex;flex-direction:column;gap:4px;width:18px}.hamburger-lines i{display:block;width:18px;height:2px;border-radius:2px;background:currentColor}
+
+.memberStatus{font-size:12px;color:var(--muted);max-width:145px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;align-self:center}
+.loginbox .auth-actions{display:grid;gap:9px;margin-top:12px}
+.loginbox .auth-actions .btn{width:100%}
+.loginbox .auth-switch{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px;font-size:13px}
+.loginbox .linkbtn{border:0;background:none;color:var(--cyan);padding:4px;font-weight:700}
+
 </style>
 </head>
 <body>
 <header><div class="wrap nav">
 <a class="brand" href="#home"><span class="logo">D</span><span>DHEERAJ <em>HUB</em></span></a>
 <nav class="links"><a href="#tools">TOOLS</a><a href="#uid">UID PLAYER</a><a href="#about">ABOUT</a></nav>
-<div class="navright"><button class="iconbtn" id="adminBrandLogo" type="button" title="DHEERAJ HUB Admin" style="display:none;border-radius:12px;width:42px;height:42px;padding:0;font-weight:900;color:#fff;background:linear-gradient(135deg,#8b5cf6,#06b6d4)">D</button><button class="iconbtn menu" id="menuBtn" aria-label="Open menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button></div>
+<div class="navright"><span class="memberStatus" id="memberStatus" style="display:none"></span><button class="btn small primary" id="memberSignIn" type="button">Sign in</button><button class="btn small" id="memberSignOut" type="button" style="display:none">Sign out</button><button class="iconbtn" id="adminBrandLogo" type="button" title="DHEERAJ HUB Admin" style="display:none;border-radius:12px;width:42px;height:42px;padding:0;font-weight:900;color:#fff;background:linear-gradient(135deg,#8b5cf6,#06b6d4)">D</button><button class="iconbtn menu" id="menuBtn" aria-label="Open menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button></div>
 </div><nav class="wrap mobile" id="mobileNav" style="display:none"><a href="#tools">Tools</a><a href="#uid">UID Player</a><a href="#about">About</a><button class="btn small" id="adminMenuOpen" type="button" style="width:100%;text-align:left;margin-top:8px">Admin Panel</button></nav></header>
 <main id="home">
 <section class="wrap hero"><div><span class="pill"><i class="dot"></i> FREE FIRE COMMUNITY TOOLKIT</span><h1>PLAY SMART.<br><span class="grad">RISE HIGH.</span></h1><p class="lead">Your gaming space for stylish names, bio designs, symbols, sensitivity planning and fun mini tools — all in one place.</p><div class="actions"><a class="btn primary" href="#tools">Explore tools →</a><a class="btn" href="#tools" id="heroUidPlayer">UID Player</a></div><div class="stats"><div class="stat"><b>12+</b><small>LOCAL TOOLS</small></div><div class="stat"><b>0</b><small>API KEYS NEEDED</small></div><div class="stat"><b>2</b><small>LANGUAGES</small></div></div></div><div class="art"><div class="core">⚡</div><div class="artfoot"><span>DHEERAJ HUB</span><span>PLAYER TOOLKIT</span></div></div></section>
-<section class="wrap section" id="tools"><div class="eyebrow">PICK A TOOL</div><h2 class="heading">Gaming tools</h2><p class="muted">Choose any tool and start using it — no account, Gmail, password or login required.</p>
+<section class="wrap section" id="tools"><div class="eyebrow">PICK A TOOL</div><h2 class="heading">Gaming tools</h2><p class="muted">Sign in to your DHEERAJ HUB account to unlock the tools.</p>
 <div class="toolgrid" id="toolGrid">
 <button class="toolcard" data-open="names"><span class="ico">Aa</span><span><b>FF Names Pro</b><small>Stylish nickname generator</small></span></button>
 <button class="toolcard" data-open="idprice"><span class="ico">💎</span><span><b>FF ID Price Calculator</b><small>Prime level and total top-up value</small></span></button>
@@ -127,11 +134,8 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
 <button class="toolcard" data-open="qr"><span class="ico">▦</span><span><b>QR Maker</b><small>Create a QR from text or link</small></span></button>
 <button class="toolcard" data-open="device"><span class="ico">📱</span><span><b>Device Sensi</b><small>Device-based settings planner</small></span></button>
 <button class="toolcard" data-open="sensi"><span class="ico">🎯</span><span><b>VIP Sensi</b><small>Build your own sensitivity preset</small></span></button>
-
-<button class="toolcard" data-open="loadout"><span class="ico">🎒</span><span><b>Loadout Planner</b><small>Save character, pet and weapon ideas</small></span></button>
 <button class="toolcard" data-open="quiz"><span class="ico">💀</span><span><b>Noob Guess Quiz</b><small>Quick Free Fire knowledge quiz</small></span></button>
 <button class="toolcard" data-open="fun"><span class="ico">🤝</span><span><b>Fun Match</b><small>Just-for-fun friendship score</small></span></button>
-<button class="toolcard" data-open="playeraura"><span class="ico">👤</span><span><b>UID Player Aura</b><small>Enter UID to reveal player aura</small></span></button>
 </div></section>
 
 <section class="wrap section" id="toolArea" style="display:none">
@@ -164,18 +168,34 @@ footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);margin
 <div class="panel toolview" id="view-sensi"><h3>VIP Sensi Builder</h3><p>Adjust each value and save your own preset locally.</p><div class="sliders" id="sensiSliders"></div><div class="result" id="sensiSummary">General / Red Dot / 2x / 4x / Sniper / Free Look</div><button class="btn primary" id="saveSensi" style="margin-top:12px">Save preset</button></div>
 
 <div class="panel toolview" id="view-booster"><h3>FF Game Booster 🚀</h3><p>Get ready for your next match with a focused game-preparation sequence.</p><div class="result" id="boostVisual" style="text-align:center;padding:22px"><div style="font-size:48px">⚡</div><h3 id="boostHeadline">Ready to enter battle?</h3><p id="boostStatus">Start the preparation sequence.</p><div style="height:12px;background:#252b3d;border-radius:20px;overflow:hidden;margin:14px 0"><div id="boostProgress" style="height:100%;width:0%;background:linear-gradient(90deg,#9b68ff,#20d5df);transition:width .3s"></div></div><div id="boostPercent">0%</div></div><button class="btn primary" id="boostDemoBtn" style="width:100%;margin:12px 0">START BOOST</button><div class="notice">Match-preparation animation only. It does not change device performance, RAM, CPU or FPS.</div><h4>Real safe performance tips</h4><div id="boosterList"></div><button class="btn" id="saveBooster" style="margin-top:12px">Save my checklist</button><div class="result" id="boosterResult">Tick any tips you have completed.</div></div>
-
-<div class="panel toolview" id="view-loadout"><h3>Loadout Planner</h3><p>Save a loadout idea on this device.</p><div class="two"><input class="input" id="loadChar" placeholder="Character"><input class="input" id="loadPet" placeholder="Pet"><input class="input" id="loadWeapon" placeholder="Weapon"><input class="input" id="loadRole" placeholder="Play style / role"></div><button class="btn primary" id="saveLoadout" style="margin-top:12px">Save loadout</button><div class="resultlist" id="loadoutList"></div></div>
-
-<div class="panel toolview" id="view-quiz"><h3>Noob Guess Quiz</h3><p>Answer a quick game knowledge question.</p><div class="result" id="quizQuestion">Question loads here.</div><div class="resultlist" id="quizAnswers"></div><div class="result" id="quizScore">Score: 0</div><button class="btn primary" id="nextQuestion" style="margin-top:10px">Next question</button></div>
+<div class="panel toolview" id="view-quiz"><h3>Noob Guess Quiz</h3><p>Free Fire से जुड़े सवालों के जवाब चुनें और सही उत्तर की वजह भी जानें।</p><div class="result" id="quizQuestion">Question loads here.</div><div class="resultlist" id="quizAnswers"></div><div class="result" id="quizScore">Score: 0</div><button class="btn primary" id="nextQuestion" style="margin-top:10px">Next question</button></div>
 
 <div class="panel toolview" id="view-fun"><h3>Fun Match</h3><p>Just a random entertainment score. It does not measure real friendship or compatibility.</p><div class="two"><input class="input" id="funName1" placeholder="Name 1"><input class="input" id="funName2" placeholder="Name 2"></div><button class="btn primary" id="runFun" style="margin-top:12px">Calculate fun score</button><div class="result" id="funResult">Your fun score will appear here.</div></div>
-
-<div class="panel toolview" id="view-uid"><h3>UID Player Profile</h3><p>UID profile lookup is intentionally inactive until a reliable data source is configured. No fake player details will be shown.</p><div class="field"><input class="input" id="uidInput" inputmode="numeric" placeholder="Enter Free Fire UID"><select class="input" id="uidRegion"><option>India (IND)</option><option>Indonesia (ID)</option><option>Russia (RU)</option><option>CIS</option><option>Thailand (TH)</option><option>Singapore (SG)</option><option>Brazil (BR)</option></select></div><button class="btn primary" id="uidDemoSearch" style="margin-top:10px">Preview profile layout</button><div class="notice" style="margin-top:12px">This preview uses clearly marked sample data only. It does not fetch a real Free Fire account. A working API/backend is still required for live UID results.</div><div class="result" id="uidResult" style="display:none"></div></div>
 </section>
 
 <section class="wrap section" id="about"><div class="notice"><b>About DHEERAJ HUB:</b> Fan-made Free Fire companion. Local tools run in your browser and do not need your game login, password, OTP or API key. This site is not affiliated with Garena. Live UID profile lookup requires a verified data API. QR generation may need an internet connection to load its browser library.</div></section>
 </main>
+
+
+<div class="modalback" id="memberModal" role="dialog" aria-modal="true" aria-labelledby="memberTitle">
+ <div class="loginbox">
+  <div class="backrow"><span class="pill"><i class="dot"></i> MEMBER ACCESS</span><button class="iconbtn" id="memberClose" type="button" aria-label="Close">✕</button></div>
+  <div class="core" aria-hidden="true">⚡</div>
+  <h2 id="memberTitle" style="text-align:center">Sign in to DHEERAJ HUB</h2>
+  <p id="memberSubtitle" style="text-align:center">Sign in or create an account to unlock all website tools.</p>
+  <form id="memberLoginForm">
+   <label for="memberEmail">Email</label><input class="input" id="memberEmail" type="email" autocomplete="email" placeholder="Enter your email" required>
+   <label for="memberPassword">Password</label><input class="input" id="memberPassword" type="password" autocomplete="current-password" minlength="6" placeholder="At least 6 characters" required>
+   <div class="auth-actions"><button class="btn primary" id="memberSubmit" type="submit">Sign in</button></div>
+  </form>
+  <div class="auth-actions">
+   <button class="btn" id="memberGoogle" type="button">Continue with Google</button>
+   <button class="linkbtn" id="memberForgot" type="button">Forgot password?</button>
+  </div>
+  <div class="auth-switch"><span id="memberModeText">New here?</span><button class="linkbtn" id="memberModeToggle" type="button">Create account</button></div>
+  <div class="notice" id="memberMessage" role="status" style="margin-top:12px">Your account is used only for this website's member access. Admin access is separate.</div>
+ </div>
+</div>
 
 <div class="modalback" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
  <div class="loginbox">
@@ -233,13 +253,15 @@ const safe=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;
 const copyText=async(text)=>{try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text)}else{const x=document.createElement('textarea');x.value=text;x.style.position='fixed';x.style.opacity='0';document.body.appendChild(x);x.select();const ok=document.execCommand('copy');x.remove();if(!ok)throw Error('copy failed')}toast('Copied to clipboard')}catch(e){toast('Copy unavailable on this browser')}};
 const get=(k,d)=>{try{return JSON.parse(localStorage.getItem('dhv2_'+k))??d}catch(e){return d}};
 const put=(k,v)=>{try{localStorage.setItem('dhv2_'+k,JSON.stringify(v));return true}catch(e){toast('Browser storage unavailable');return false}};
-const toolNames={names:'FF Names Pro',idprice:'FF ID Price Calculator',uidinfo:'FF UID Info',playeraura:'Player Aura',bio:'FF Aura Bio',fonts:'Stylish Text',symbols:'FF Symbols',qr:'QR Maker',device:'Device Sensi',sensi:'VIP Sensi Builder',booster:'FF Game Booster',loadout:'Loadout Planner',quiz:'Noob Guess Quiz',fun:'Fun Match',uid:'UID Player Profile'};
+const toolNames={names:'FF Names Pro',idprice:'FF ID Price Calculator',uidinfo:'FF UID Info',playeraura:'Player Aura',bio:'FF Aura Bio',fonts:'Stylish Text',symbols:'FF Symbols',qr:'QR Maker',device:'Device Sensi',sensi:'VIP Sensi Builder',booster:'FF Game Booster',quiz:'Noob Guess Quiz',fun:'Fun Match'};
+let pendingTool=null,memberAuth=null,memberApp=null,memberMode='signin',memberReady=false;
 function openTool(id){
- document.querySelectorAll('.toolview').forEach(x=>x.classList.remove('active'));
  const v=$('view-'+id);if(!v)return;
+ if(!memberAuth||!memberAuth.currentUser){pendingTool=id;try{sessionStorage.setItem('dh_pending_tool',id)}catch(e){}openMemberModal();return;}
+ document.querySelectorAll('.toolview').forEach(x=>x.classList.remove('active'));
  v.classList.add('active');
  $('toolArea').style.display='block';
- $('toolTitle').textContent=toolNames[id];
+ $('toolTitle').textContent=toolNames[id]||'Tool';
  $('tools').style.display='none';
  $('toolArea').scrollIntoView({behavior:'smooth'});
  if(id==='quiz'&&!quizStarted)showQuestion();
@@ -392,16 +414,18 @@ $('boostDemoBtn').addEventListener('click',()=>{
  setTimeout(tick,250);
 });
 
-// Loadout planner
-function renderLoadouts(){const arr=get('loadouts',[]);$('loadoutList').innerHTML=arr.length?arr.map((x,i)=>`<div class="resultrow"><span><b>${safe(x.character||'—')}</b><br><small>Pet: ${safe(x.pet||'—')} · Weapon: ${safe(x.weapon||'—')} · Role: ${safe(x.role||'—')}</small></span><button class="btn small" data-delete-loadout="${i}">Delete</button></div>`).join(''):'<div class="result">No loadouts saved yet.</div>'}
-$('saveLoadout').addEventListener('click',()=>{const x={character:$('loadChar').value.trim(),pet:$('loadPet').value.trim(),weapon:$('loadWeapon').value.trim(),role:$('loadRole').value.trim()};if(!Object.values(x).some(Boolean))return toast('Enter at least one detail');const arr=get('loadouts',[]);arr.push(x);put('loadouts',arr);renderLoadouts();toast('Loadout saved')});
-$('loadoutList').addEventListener('click',e=>{const b=e.target.closest('[data-delete-loadout]');if(!b)return;const arr=get('loadouts',[]);arr.splice(Number(b.dataset.deleteLoadout),1);put('loadouts',arr);renderLoadouts()});renderLoadouts();
 
 // Quiz
-const questions=[['Which item restores HP in Free Fire?',['Med Kit','Gloo Wall','Scope'],0],['What does a Gloo Wall mainly provide?',['Vehicle speed','Temporary cover','Extra ammo'],1],['Which scope is commonly used for long-range aiming?',['2x','4x','Red Dot'],1],['What is a good habit when adjusting sensitivity?',['Change all values at once','Test one change at a time','Never test'],1],['Which map is a classic Free Fire map?',['Bermuda','Miramar','Erangel'],0]];
+const questions=[
+ ['Free Fire में HP (हेल्थ) बढ़ाने के लिए कौन-सी चीज़ इस्तेमाल होती है?',['मेड किट','ग्लू वॉल','स्कोप'],0,'मेड किट खिलाड़ी की HP वापस बढ़ाने में मदद करती है।'],
+ ['ग्लू वॉल का मुख्य उपयोग क्या है?',['तेज़ गाड़ी चलाना','अस्थायी कवर लेना','अतिरिक्त गोलियाँ पाना'],1,'ग्लू वॉल दुश्मन की गोलियों से बचने के लिए अस्थायी कवर देती है।'],
+ ['दूर के दुश्मन को निशाना बनाने में इनमें से कौन-सा स्कोप उपयोगी है?',['2x स्कोप','4x स्कोप','रेड डॉट'],1,'4x स्कोप दूर के लक्ष्य को बड़ा करके देखने में मदद करता है।'],
+ ['Sensitivity बदलते समय कौन-सी आदत बेहतर है?',['सभी वैल्यू एक साथ बदलना','एक बार में एक बदलाव करके टेस्ट करना','बिना टेस्ट किए सेटिंग रखना'],1,'एक-एक बदलाव टेस्ट करने से पता चलता है कि किस सेटिंग से फर्क पड़ा।'],
+ ['Free Fire का क्लासिक मैप कौन-सा है?',['बरमूडा','मिरामार','एरेंगल'],0,'बरमूडा Free Fire के क्लासिक मैप्स में से एक है।']
+];
 let qIndex=0,score=0,answered=false,quizStarted=false;
-function showQuestion(){quizStarted=true;answered=false;const q=questions[qIndex];$('quizQuestion').textContent=`Q${qIndex+1}. ${q[0]}`;$('quizAnswers').innerHTML=q[1].map((a,i)=>`<button class="btn" data-answer="${i}">${safe(a)}</button>`).join('');$('quizScore').textContent=`Score: ${score}`}
-$('quizAnswers').addEventListener('click',e=>{const b=e.target.closest('[data-answer]');if(!b||answered)return;answered=true;const ok=Number(b.dataset.answer)===questions[qIndex][2];if(ok)score++;$('quizScore').textContent=ok?`Correct! Score: ${score}`:`Not quite. Correct answer: ${questions[qIndex][1][questions[qIndex][2]]} · Score: ${score}`});
+function showQuestion(){quizStarted=true;answered=false;const q=questions[qIndex];$('quizQuestion').textContent=`प्रश्न ${qIndex+1}. ${q[0]}`;$('quizAnswers').innerHTML=q[1].map((a,i)=>`<button class="btn" data-answer="${i}">${safe(a)}</button>`).join('');$('quizScore').textContent=`स्कोर: ${score}`}
+$('quizAnswers').addEventListener('click',e=>{const b=e.target.closest('[data-answer]');if(!b||answered)return;answered=true;const q=questions[qIndex],correct=q[2],ok=Number(b.dataset.answer)===correct;if(ok)score++;$('quizAnswers').querySelectorAll('[data-answer]').forEach((btn,i)=>{btn.disabled=true;if(i===correct)btn.style.borderColor='#20d5df';if(i===Number(b.dataset.answer)&&!ok)btn.style.borderColor='#ff55a5'});const feedback=document.createElement('div');feedback.className='result';feedback.innerHTML=`<b>${ok?'✅ सही जवाब!':'❌ सही जवाब: '+safe(q[1][correct])}</b><br><span>${safe(q[3])}</span>`;$('quizAnswers').appendChild(feedback);$('quizScore').textContent=`स्कोर: ${score}`});
 $('nextQuestion').addEventListener('click',()=>{qIndex=(qIndex+1)%questions.length;if(qIndex===0)score=0;showQuestion()});
 
 // Fun score, explicitly entertainment only
@@ -427,6 +451,100 @@ function getDeviceId(){
  }catch(e){return 'storage-unavailable';}
 }
 const installationId=getDeviceId();
+
+function openMemberModal(){
+ $('memberModal').classList.add('show');
+ $('memberMessage').textContent=memberReady?'Sign in or create an account to unlock the tools.':'Connecting to secure sign-in…';
+ $('mobileNav').style.display='none';
+}
+function setMemberMode(mode){
+ memberMode=mode;
+ const creating=mode==='create';
+ $('memberTitle').textContent=creating?'Create your DHEERAJ HUB account':'Sign in to DHEERAJ HUB';
+ $('memberSubtitle').textContent=creating?'Create an account to unlock all website tools.':'Sign in to unlock all website tools.';
+ $('memberSubmit').textContent=creating?'Create account':'Sign in';
+ $('memberPassword').autocomplete=creating?'new-password':'current-password';
+ $('memberModeText').textContent=creating?'Already have an account?':'New here?';
+ $('memberModeToggle').textContent=creating?'Sign in':'Create account';
+ $('memberForgot').style.display=creating?'none':'inline-block';
+ $('memberMessage').textContent='';
+}
+$('memberSignIn').addEventListener('click',openMemberModal);
+$('memberClose').addEventListener('click',()=>{$('memberModal').classList.remove('show')});
+$('memberModal').addEventListener('click',e=>{if(e.target===$('memberModal'))$('memberModal').classList.remove('show')});
+$('memberModeToggle').addEventListener('click',()=>setMemberMode(memberMode==='signin'?'create':'signin'));
+$('memberLoginForm').addEventListener('submit',async e=>{
+ e.preventDefault();
+ if(!memberAuth||!memberReady){$('memberMessage').textContent='Sign-in service is not ready. Check your internet connection and reload.';return;}
+ const email=$('memberEmail').value.trim(),password=$('memberPassword').value;
+ $('memberSubmit').disabled=true;$('memberSubmit').textContent=memberMode==='create'?'Creating…':'Signing in…';
+ try{
+  await memberAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+  if(memberMode==='create')await memberAuth.createUserWithEmailAndPassword(email,password);
+  else await memberAuth.signInWithEmailAndPassword(email,password);
+  $('memberPassword').value='';
+  $('memberModal').classList.remove('show');
+  if(pendingTool){const id=pendingTool;pendingTool=null;try{sessionStorage.removeItem('dh_pending_tool')}catch(e){}openTool(id);}
+  toast(memberMode==='create'?'Account created':'Signed in successfully');
+ }catch(err){$('memberMessage').textContent=memberAuthError(err);}
+ finally{ $('memberSubmit').disabled=false;$('memberSubmit').textContent=memberMode==='create'?'Create account':'Sign in';}
+});
+$('memberGoogle').addEventListener('click',async()=>{
+ if(!memberAuth||!memberReady){$('memberMessage').textContent='Sign-in service is not ready. Reload the website and try again.';return;}
+ const btn=$('memberGoogle');btn.disabled=true;btn.textContent='Opening Google…';
+ try{
+  await memberAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+  const provider=new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({prompt:'select_account'});
+  await memberAuth.signInWithPopup(provider);
+  $('memberModal').classList.remove('show');
+  if(pendingTool){const id=pendingTool;pendingTool=null;try{sessionStorage.removeItem('dh_pending_tool')}catch(e){}openTool(id);}
+  toast('Signed in with Google');
+ }catch(err){
+  if(err.code==='auth/popup-blocked'||err.code==='auth/operation-not-supported-in-this-environment'){
+   try{const provider=new firebase.auth.GoogleAuthProvider();await memberAuth.signInWithRedirect(provider);}catch(e){$('memberMessage').textContent=memberAuthError(e);}
+  }else $('memberMessage').textContent=memberAuthError(err);
+ }finally{btn.disabled=false;btn.textContent='Continue with Google';}
+});
+$('memberForgot').addEventListener('click',async()=>{
+ const email=$('memberEmail').value.trim();
+ if(!email){$('memberMessage').textContent='Enter your email first, then tap Forgot password.';return;}
+ if(!memberAuth||!memberReady){$('memberMessage').textContent='Sign-in service is not ready. Try again after reloading.';return;}
+ try{await memberAuth.sendPasswordResetEmail(email);$('memberMessage').textContent='Password reset email sent. Check your inbox and spam folder.';}
+ catch(err){$('memberMessage').textContent=memberAuthError(err);}
+});
+$('memberSignOut').addEventListener('click',async()=>{
+ try{await memberAuth.signOut();$('toolArea').style.display='none';$('tools').style.display='block';toast('Signed out');}
+ catch(err){toast(memberAuthError(err));}
+});
+function memberAuthError(err){
+ const messages={
+  'auth/invalid-email':'Please enter a valid email address.',
+  'auth/user-not-found':'No account found for this email. Create an account first.',
+  'auth/wrong-password':'Incorrect password. Try again or use Forgot password.',
+  'auth/invalid-credential':'Email or password is incorrect.',
+  'auth/email-already-in-use':'An account already exists with this email. Sign in instead.',
+  'auth/weak-password':'Use a stronger password with at least 6 characters.',
+  'auth/popup-closed-by-user':'Google sign-in was closed before completion.',
+  'auth/unauthorized-domain':'This website domain is not authorized in Firebase Authentication settings.',
+  'auth/operation-not-allowed':'Enable Email/Password and Google providers in Firebase Authentication.',
+  'auth/network-request-failed':'Network problem. Check your internet connection.'
+ };
+ return messages[err.code]||err.message||'Sign-in failed. Please try again.';
+}
+function updateMemberUI(user){
+ const signedIn=!!user;
+ $('memberSignIn').style.display=signedIn?'none':'inline-flex';
+ $('memberSignOut').style.display=signedIn?'inline-flex':'none';
+ $('memberStatus').style.display=signedIn?'inline-block':'none';
+ $('memberStatus').textContent=signedIn?(user.displayName||user.email||'Member'):'';
+ if(!signedIn){$('toolArea').style.display='none';$('tools').style.display='block';}
+ else{
+  let restored=null;try{restored=sessionStorage.getItem('dh_pending_tool');sessionStorage.removeItem('dh_pending_tool')}catch(e){}
+  if(restored&&$('view-'+restored))openTool(restored);
+ }
+}
+
 $('heroUidPlayer').addEventListener('click',e=>{e.preventDefault();openTool('playeraura')});
 $('adminBrandLogo').addEventListener('click',()=>{
  if(!adminVerified)return;
@@ -487,7 +605,7 @@ $('adminLoginForm').addEventListener('submit',async e=>{
   $('localAdminStatus').textContent='Admin session verified on this browser.';
   adminVerified=true;
   $('adminBrandLogo').style.display='inline-flex';
-  $('adminOpen').style.display='none';
+  if($('adminOpen'))$('adminOpen').style.display='none';
   $('adminModal').classList.remove('show');
   $('adminPanel').classList.add('show');
   $('adminPanel').scrollIntoView({behavior:'smooth'});
@@ -500,16 +618,22 @@ $('adminLoginForm').addEventListener('submit',async e=>{
 function loadFirebase(){
  const appScript=document.createElement('script');
  appScript.src='https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js';
- appScript.onerror=()=>{$('adminMessage').textContent='Could not load Firebase App SDK. Check internet connection.';};
+ appScript.onerror=()=>{$('adminMessage').textContent='Could not load Firebase App SDK. Check internet connection.';$('memberMessage').textContent='Sign-in service could not load. Check internet connection.';};
  appScript.onload=()=>{
   const authScript=document.createElement('script');
   authScript.src='https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js';
-  authScript.onerror=()=>{$('adminMessage').textContent='Firebase Auth SDK failed to load.';};
+  authScript.onerror=()=>{$('adminMessage').textContent='Firebase Auth SDK failed to load.';$('memberMessage').textContent='Sign-in service could not load. Reload the website.';};
   authScript.onload=()=>{
    try{
     if(!firebase.apps.some(app=>app.name==='dheeraj-admin'))adminApp=firebase.initializeApp(firebaseConfig,'dheeraj-admin');
     else adminApp=firebase.app('dheeraj-admin');
     adminAuth=adminApp.auth();
+    if(!firebase.apps.some(app=>app.name==='dheeraj-member'))memberApp=firebase.initializeApp(firebaseConfig,'dheeraj-member');
+    else memberApp=firebase.app('dheeraj-member');
+    memberAuth=memberApp.auth();
+    memberReady=true;
+    memberAuth.onAuthStateChanged(updateMemberUI);
+    memberAuth.getRedirectResult().catch(err=>{$('memberMessage').textContent=memberAuthError(err);});
 
     const functionsScript=document.createElement('script');
     functionsScript.src='https://www.gstatic.com/firebasejs/10.12.2/firebase-functions-compat.js';
@@ -537,8 +661,6 @@ function loadFirebase(){
 }
 if(firebaseReady)loadFirebase();
 
-// Live UID profile data is not fabricated. The hero UID button now opens the working UID-based Player Aura tool.
-$('uidDemoSearch').addEventListener('click',()=>{toast('Live UID profile lookup needs a verified Free Fire data API. Use Player Aura for UID-based entertainment.');openTool('playeraura')});
 
 // Fill generators with editable examples so each tool has something visible immediately.
 $('nameInput').value='Dheeraj';
@@ -547,7 +669,7 @@ $('bioInput').value='DHEERAJ 亗 BOOYAH';
 updateBio();
 $('fontInput').value='Dheeraj Hub';
 $('makeFonts').click();
-$('qrInput').value='https://dheerajxhub.github.io/DHEERAJ-HUB/';
+
 $('funName1').value='Dheeraj';
 $('funName2').value='Player';
 </script>
