@@ -5,25 +5,91 @@ const cors = require("cors");
 const app = express();
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: "10kb" }));
 
-// ===============================
-// DHEERAJ HUB API STATUS
-// ===============================
+const PORT = process.env.PORT || 3000;
 
+const API_BASE =
+  "https://freefireinfo-zy9l.onrender.com";
+
+const ALLOWED_SERVERS = [
+  "IND", "SG", "RU", "ID", "TW", "US",
+  "VN", "TH", "ME", "PK", "CIS", "BR", "BD"
+];
+
+// Normalize API fields
+function normalizeProfile(data) {
+  const basic = data.basicInfo || data.basicinfo || {};
+
+  const clan =
+    data.clanBasicInfo || data.clanbasicinfo || {};
+
+  const credit =
+    data.creditScoreInfo || data.creditscoreinfo || {};
+
+  const prime =
+    basic.primePrivilegeDetail ||
+    basic.primeprivilegedetail || {};
+
+  const pet = data.petInfo || data.petinfo || {};
+
+  const profile =
+    data.profileInfo || data.profileinfo || {};
+
+  const social =
+    data.socialInfo || data.socialinfo || {};
+
+  return {
+    accountId: basic.accountId || basic.accountid || null,
+    nickname: basic.nickname || null,
+    level: basic.level ?? null,
+    exp: basic.exp ?? null,
+    likes: basic.liked ?? null,
+    region: basic.region || null,
+
+    rank: basic.rank ?? null,
+    rankingPoints: basic.rankingPoints ??
+      basic.rankingpoints ?? null,
+
+    csRank: basic.csRank ?? basic.csrank ?? null,
+    csRankingPoints: basic.csRankingPoints ??
+      basic.csrankingpoints ?? null,
+
+    primeLevel: prime.primeLevel ??
+      prime.primelevel ?? null,
+
+    creditScore: credit.creditScore ??
+      credit.creditscore ?? null,
+
+    pet: {
+      id: pet.id ?? null,
+      level: pet.level ?? null
+    },
+
+    clan,
+    avatarId: profile.avatarId ??
+      profile.avatarid ?? null,
+
+    clothes: profile.clothes || [],
+    equippedSkills: profile.equipedSkills ||
+      profile.equippedSkills ||
+      profile.equipedskills || [],
+
+    signature: social.signature || null
+  };
+}
+
+// Home
 app.get("/", (req, res) => {
   res.json({
     success: true,
     status: "online",
     project: "DHEERAJ HUB API",
-    version: "2.0"
+    version: "3.0"
   });
 });
 
-// ===============================
-// HEALTH CHECK
-// ===============================
-
+// Health
 app.get("/health", (req, res) => {
   res.json({
     success: true,
@@ -31,113 +97,124 @@ app.get("/health", (req, res) => {
   });
 });
 
-// ===============================
-// FREE FIRE PLAYER INFO
-// ===============================
-
+// Free Fire UID Info
 app.get("/api/ff/info", async (req, res) => {
-  const { uid, server = "IND" } = req.query;
+  const uid = String(req.query.uid || "").trim();
+  const server = String(req.query.server || "IND")
+    .trim()
+    .toUpperCase();
 
-  // UID validation
-  if (!uid || !/^\d{8,12}$/.test(String(uid))) {
+  if (!/^\d{8,12}$/.test(uid)) {
     return res.status(400).json({
       success: false,
       message: "UID must contain 8 to 12 digits."
     });
   }
 
-  // Server validation
-  const allowedServers = [
-    "IND", "SG", "RU", "ID", "TW", "US",
-    "VN", "TH", "ME", "PK", "CIS", "BR", "BD"
-  ];
-
-  const selectedServer = String(server).toUpperCase();
-
-  if (!allowedServers.includes(selectedServer)) {
+  if (!ALLOWED_SERVERS.includes(server)) {
     return res.status(400).json({
       success: false,
-      message: "Invalid server.",
-      supportedServers: allowedServers
+      message: "Unsupported region.",
+      supportedServers: ALLOWED_SERVERS
     });
   }
 
-  const apiUrl = new URL(
-    "https://freefireinfo-zy9l.onrender.com/api/v1/player-profile"
+  const controller = new AbortController();
+
+  const timeout = setTimeout(
+    () => controller.abort(),
+    25000
   );
 
-  apiUrl.searchParams.set("uid", uid);
-  apiUrl.searchParams.set("server", selectedServer);
-
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 30000);
-
   try {
-    const response = await fetch(apiUrl.toString(), {
+    const url = new URL(
+      API_BASE + "/api/v1/player-profile"
+    );
+
+    url.searchParams.set("uid", uid);
+    url.searchParams.set("server", server);
+
+    const response = await fetch(url.toString(), {
       method: "GET",
       headers: {
         "Accept": "application/json",
-        "User-Agent": "DHEERAJ-HUB-API/2.0"
+        "User-Agent": "DHEERAJHUB/3.0 (+https://dheerajxhub.github.io/DHEERAJ-HUB/)"
       },
       signal: controller.signal
     });
 
-    const responseText = await response.text();
-    const contentType = response.headers.get("content-type") || "";
+    const body = await response.text();
 
-    // Check whether upstream returned JSON
-    let playerData;
+    let data;
 
     try {
-      playerData = JSON.parse(responseText);
-    } catch (parseError) {
-      console.error("Non-JSON API response:", {
+      data = JSON.parse(body);
+    } catch {
+      console.error("Upstream non-JSON:", {
         status: response.status,
-        contentType,
-        preview: responseText.slice(0, 300)
+        body: body.slice(0, 300)
       });
 
       return res.status(502).json({
         success: false,
-        message: "Free Fire API returned a non-JSON response.",
+        message: "Free Fire provider returned an invalid response.",
         upstreamStatus: response.status,
-        contentType,
-        responsePreview: responseText.slice(0, 300)
+        responsePreview: body.slice(0, 300)
       });
     }
 
-    // Check upstream HTTP status
     if (!response.ok) {
       return res.status(502).json({
         success: false,
-        message: "Free Fire API request failed.",
+        message: "Free Fire provider request failed.",
         upstreamStatus: response.status,
-        details: playerData
+        details: data
       });
     }
 
-    // Return player data
-    return res.status(200).json({
+    if (
+      data.success === false ||
+      data.error ||
+      data.message === "Player not found"
+    ) {
+      return res.status(404).json({
+        success: false,
+        message: data.message || "Player not found.",
+        details: data
+      });
+    }
+
+    const basic =
+      data.basicInfo || data.basicinfo;
+
+    if (!basic || !basic.accountid && !basic.accountId) {
+      return res.status(502).json({
+        success: false,
+        message: "Player data was missing from provider response."
+      });
+    }
+
+    return res.json({
       success: true,
-      uid: String(uid),
-      server: selectedServer,
-      data: playerData
+      uid,
+      server,
+      data: normalizeProfile(data),
+      rawData: data
     });
 
   } catch (error) {
-    console.error("Free Fire API Error:", error);
+    console.error("UID API error:", error.message);
 
     if (error.name === "AbortError") {
       return res.status(504).json({
         success: false,
-        message: "Free Fire API timed out. Try again later."
+        message: "Free Fire API timed out. Try again."
       });
     }
 
     return res.status(502).json({
       success: false,
-      message: "Unable to connect to Free Fire API.",
-      error: error.message
+      message: "Unable to connect to Free Fire provider."
     });
 
   } finally {
@@ -145,13 +222,18 @@ app.get("/api/ff/info", async (req, res) => {
   }
 });
 
-// ===============================
-// START SERVER
-// ===============================
+// 404 route
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "DHEERAJ HUB API route not found."
+  });
+});
 
-const PORT = process.env.PORT || 3000;
-
+// Start server
 app.listen(PORT, () => {
-  console.log(`DHEERAJ HUB API running on port ${PORT}`);
+  console.log(
+    `DHEERAJ HUB API running on port ${PORT}`
+  );
 });
       
