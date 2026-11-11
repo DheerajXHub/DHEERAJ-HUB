@@ -80,13 +80,14 @@ app.get("/api/ff/info", async (req, res) => {
     let data;
 
     try {
-      data = JSON.parse(responseText);
-    } catch {
-      return res.status(502).json({
-        success: false,
-        message: "Player API returned an invalid response."
-      });
-    }
+  data = JSON.parse(responseText);
+} catch {
+  return res.status(502).json({
+    success: false,
+    message: "Player API returned an invalid response."
+  });
+}
+
 
     if (!response.ok) {
       return res.status(502).json({
